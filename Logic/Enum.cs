@@ -2,6 +2,7 @@ public class Enum
 {
     enum License
     {
+        noll,
         A,
         B,
         C,
@@ -10,10 +11,11 @@ public class Enum
 
     enum Education
     {
-        Gymnasium, 
-        Universitet, 
-        Yrkeshögskola, 
-        Folkhögskola, 
-        
+        noll,
+        Gymnasium,
+        Universitet,
+        Yrkeshögskola,
+        Folkhögskola,
+
     }
 }

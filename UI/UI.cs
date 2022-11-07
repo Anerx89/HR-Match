@@ -47,8 +47,11 @@ class UI
         Console.Write("Please enter your email:");
         string email = Console.ReadLine();
         Console.Write("Please enter your password:");
-        string password = (string)Console.ReadLine();
-        newLogic.CreateNewJobSeeker(name, age, email, password);
+        string password = Console.ReadLine();
+        Console.Write("Please enter your experience:");
+        string exp = Console.ReadLine();
+
+        newLogic.CreateNewJobSeeker(name, age, email, password, exp);
 
     }
     public void RegisterNewCompany()

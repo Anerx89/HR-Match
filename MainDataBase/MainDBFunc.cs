@@ -9,9 +9,14 @@ public class MainDBFunc
     public void AddJobSeekerToDB(IsData newJobSeeker)
     {
         var connection = new MySqlConnection(sqlString);
-        string sqlQuery = "INSERT INTO job_seeker (seeker_name, seeker_age, seeker_email, password) VALUES (@seeker_name, @seeker_age, @seeker_email, @password);";
+        string sqlQuery = "INSERT INTO seeker (seeker_name, seeker_age, seeker_email, password, experience) VALUES (@seeker_name, @seeker_age, @seeker_email, @password, @experience);";
         var rowsAffected = connection.Execute(sqlQuery, newJobSeeker);
-
+    }
+    public void AddSeekerLicense(int seekerID, int license)
+    {
+        var connection = new MySqlConnection(sqlString);
+        string sqlQuery = $"INSERT INTO seeker_license (seeker_id, license_id) VALUES ({seekerID}, {license});";
+        var rowsAffected = connection.Execute(sqlQuery);
     }
     public void AddCompanyToDB(IsData newComp)
     {
@@ -26,16 +31,32 @@ public class MainDBFunc
         var rowsAffected = connection.Execute(sqlQuery, newJob);
     }
 
-    public List<JobSeeker> SearchSeekerInDB()
+    public List<Seeker> SearchSeekerInDB()
     {
-        List<JobSeeker> loggedInUser = new();
+        List<Seeker> loggedInUser = new();
         var connection = new MySqlConnection(sqlString);
-        var data = connection.Query<JobSeeker>("SELECT seeker_id, seeker_email, password FROM job_seeker;").ToList();
-        foreach (JobSeeker j in data)
+        var data = connection.Query<Seeker>("SELECT seeker_id, seeker_email, password FROM seeker;").ToList();
+        foreach (Seeker j in data)
         {
             loggedInUser.Add(j);
         }
         return loggedInUser;
+    }
+    public int FindSeekerID(string seekerName)
+    {
+        int seekerID = 0;
+        var connection = new MySqlConnection(sqlString);
+        var data = connection.Query<Seeker>("SELECT seeker_id, seeker_name FROM seeker;").ToList();
+        foreach (Seeker seeker in data)
+        {
+            if (seeker.seeker_name.Contains(seekerName))
+            {
+                seekerID = seeker.seeker_id;
+                Console.WriteLine(seekerID);
+                Console.ReadLine();
+            }
+        }
+        return seekerID;
     }
     public List<Company> SearchCompanyInDB()
     {
