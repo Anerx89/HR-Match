@@ -1,5 +1,6 @@
 public class JobSeeker : IsData
 {
+    public int seeker_id { get; set; }
     public string seeker_name { get; set; }
     public int seeker_age { get; set; }
     public string seeker_email { get; set; }

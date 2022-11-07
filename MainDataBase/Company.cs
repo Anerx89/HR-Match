@@ -6,7 +6,10 @@ public class Company : IsData
     public string c_email { get; set; }
     public string password { get; set; }
 
+    public Company()
+    {
 
+    }
 
     public Company(string name, string location, string workArea, string email, string pass)
     {

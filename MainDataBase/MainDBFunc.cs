@@ -25,16 +25,27 @@ public class MainDBFunc
         var rowsAffected = connection.Execute(sqlQuery, newJob);
     }
 
-    public List<JobSeeker> SearchInDB()
+    public List<JobSeeker> SearchSeekerInDB()
     {
         List<JobSeeker> loggedInUser = new();
         var connection = new MySqlConnection("Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;");
-        var data = connection.Query<JobSeeker>("SELECT seeker_email, password FROM job_seeker;").ToList();
+        var data = connection.Query<JobSeeker>("SELECT seeker_id, seeker_email, password FROM job_seeker;").ToList();
         foreach (JobSeeker j in data)
         {
             loggedInUser.Add(j);
         }
         return loggedInUser;
+    }
+    public List<Company> SearchEmployeInDB()
+    {
+        List<Company> loggedInCompany = new();
+        var connection = new MySqlConnection("Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;");
+        var data = connection.Query<Company>("SELECT seeker_id, seeker_email, password FROM job_seeker;").ToList();
+        foreach (Company c in data)
+        {
+            loggedInCompany.Add(c);
+        }
+        return loggedInCompany;
     }
     public void CompareJobToSeeker()
     {

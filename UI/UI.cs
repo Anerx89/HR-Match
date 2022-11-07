@@ -72,7 +72,7 @@ class UI
                 string email = Console.ReadLine();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
-                if (newLogic.LoginUser(email, password))
+                if (newLogic.LoginJobSeeker(email, password))
                 {
                     Console.Write("You are in");
                     Console.ReadLine();
