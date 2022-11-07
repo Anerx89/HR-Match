@@ -22,7 +22,7 @@ public class MainLogic
         if (password.Length >= 8 && !password.Contains(" "))
         {
             Company newComp = new(name, location, workArea, email, password);
-            newDB.AddEmployerToDB(newComp);
+            newDB.AddCompanyToDB(newComp);
             return true;
         }
         return false;

@@ -12,7 +12,7 @@ public class MainDBFunc
         var rowsAffected = connection.Execute(sqlQuery, newJobSeeker);
 
     }
-    public void AddEmployerToDB(IsData newComp)
+    public void AddCompanyToDB(IsData newComp)
     {
         var connection = new MySqlConnection("Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;");
         string sqlQuery = "INSERT INTO company (c_name, c_location, c_work_area, c_email, password) VALUES (@c_name, @c_location, @c_work_area, @c_email, @password);";
@@ -36,7 +36,7 @@ public class MainDBFunc
         }
         return loggedInUser;
     }
-    public List<Company> SearchEmployeInDB()
+    public List<Company> SearchCompanyInDB()
     {
         List<Company> loggedInCompany = new();
         var connection = new MySqlConnection("Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;");
