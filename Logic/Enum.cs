@@ -10,6 +10,10 @@ public class Enum
 
     enum Education
     {
-
+        Gymnasium, 
+        Universitet, 
+        Yrkeshögskola, 
+        Folkhögskola, 
+        
     }
 }
