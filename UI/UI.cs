@@ -24,7 +24,7 @@ class UI
             }
             else if (inputKey == ConsoleKey.D3)
             {
-                RegisterNewCompany();
+                RegisterNewJob();
 
             }
             else if (inputKey == ConsoleKey.Q)
@@ -56,7 +56,32 @@ class UI
     }
     public void RegisterNewCompany()
     {
+        Console.Write("Please enter your company name:");
+        string name = Console.ReadLine();
+        Console.Write("Please enter your location:");
+        string location = Console.ReadLine();
+        Console.Write("Please enter your working area:");
+        string work_area = Console.ReadLine();
+        Console.Write("Please enter your email:");
+        string email = Console.ReadLine();
+        Console.Write("Please enter your password:");
+        string password = Console.ReadLine();
 
+        newLogic.CreateNewCompany(name, location, work_area, email, password);
+
+    }
+
+    public void RegisterNewJob()
+    {
+        Console.Write("Please enter your company name:");
+        string title = Console.ReadLine();
+        Console.Write("Please enter your location:");
+        string description = Console.ReadLine();
+        Console.Write("Please enter your working area:");
+        string location = Console.ReadLine();
+
+
+        newLogic.CreateNewJob(title, description, location);
     }
 
     public void LoginMenu()
@@ -77,8 +102,7 @@ class UI
                 string password = Console.ReadLine();
                 if (newLogic.LoginJobSeeker(email, password))
                 {
-                    Console.Write("You are in");
-                    Console.ReadLine();
+
                 }
                 else
                 {
@@ -89,7 +113,19 @@ class UI
             }
             else if (inputKey == ConsoleKey.D2)
             {
-
+                Console.Write("Please enter your email:");
+                string email = Console.ReadLine();
+                Console.Write("Please enter your password:");
+                string password = Console.ReadLine();
+                if (newLogic.LoginCompany(email, password))
+                {
+                    RegisterNewJob();
+                }
+                else
+                {
+                    Console.Write("You are not in");
+                    Console.ReadLine();
+                }
 
             }
             else if (inputKey == ConsoleKey.Q)

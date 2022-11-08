@@ -1,10 +1,11 @@
 public class Company : IsData
 {
-    public string c_name { get; set; }
-    public string c_location { get; set; }
-    public string c_work_area { get; set; }
-    public string c_email { get; set; }
-    public string password { get; set; }
+    public int C_id { get; set; }
+    public string C_name { get; set; }
+    public string C_location { get; set; }
+    public string C_work_area { get; set; }
+    public string C_email { get; set; }
+    public string Password { get; set; }
 
     public Company()
     {
@@ -13,9 +14,10 @@ public class Company : IsData
 
     public Company(string name, string location, string workArea, string email, string pass)
     {
-        c_name = name;
-        c_location = location;
-        c_work_area = workArea;
-        password = pass;
+        C_name = name;
+        C_location = location;
+        C_work_area = workArea;
+        C_email = email;
+        Password = pass;
     }
 }

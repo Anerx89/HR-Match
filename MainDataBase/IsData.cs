@@ -1,6 +1,6 @@
 using System;
 public interface IsData
 {
-    public string password { get; set; }
-    // public string email { get; set; }
+    public string Password { get; set; }
+
 }
