@@ -1,6 +1,7 @@
 public class Seeker : IsData
 {
     public int Seeker_id { get; set; }
+    public int License_id { get; set; }
     public string Seeker_name { get; set; }
     public int Seeker_age { get; set; }
     public string Seeker_email { get; set; }

@@ -54,23 +54,23 @@ public class MainDBFunc
             if (seeker.Seeker_name.Contains(seekerName))
             {
                 seekerID = seeker.Seeker_id;
-                Console.WriteLine(seekerID);
-                Console.ReadLine();
             }
         }
         return seekerID;
     }
-    public int FindJobID()
+    public int FindJobID(int compID)
     {
-        int companyAndJobID = 0;
+        int jobID = 0;
         var connection = new MySqlConnection(sqlString);
-        var data = connection.Query<Job>("SELECT job_id AS Job_id FROM job;").ToList();
+        var data = connection.Query<Job>("SELECT job_id AS Job_id, company_id AS Company_id FROM job;").ToList();
         foreach (Job job in data)
         {
-
+            if (job.Company_id == compID)
+            {
+                jobID = job.Job_id;
+            }
         }
-
-        return companyAndJobID;
+        return jobID;
     }
     public List<Company> SearchCompanyInDB()
     {
@@ -85,7 +85,34 @@ public class MainDBFunc
     }
     public void CompareJobToSeeker()
     {
+        List<int> firstSearch = new();
+        var connection = new MySqlConnection(sqlString);
+        var jobs = connection.Query<Job>("SELECT job_id AS Job_id, license_id AS License_id FROM job_license;").ToList();
+        var seeker = connection.Query<Seeker>("SELECT seeker_id AS Seeker_id, license_id AS License_id FROM seeker_license;").ToList();
+        foreach (var job in jobs)
+        {
+            foreach (var User in seeker)
+            {
+                if (job.License_id == User.License_id)
+                {
+                    firstSearch.Add(job.Job_id);
+                }
+            }
+        }
+        foreach (var item in firstSearch)
+        {
+            Console.WriteLine(item.ToString());
+        }
+        Console.ReadLine();
+    }
 
+    public void AddJobLicenseAndEducation(int jobID, int license, int education)
+    {
+        var connection = new MySqlConnection(sqlString);
+        string sqlQuery = $"INSERT INTO job_license (job_id, license_id) VALUES ({jobID}, {license});";
+        string sqlQuery2 = $"INSERT INTO job_education (job_id, education_id) VALUES ({jobID}, {education});";
+        connection.Execute(sqlQuery);
+        connection.Execute(sqlQuery2);
     }
 
 }

@@ -33,7 +33,10 @@ public class MainLogic
     {
         Job newJob = new(loggedInUserId, title, description, location);
         newDB.AddJobToDB(newJob);
+        newDB.AddJobLicenseAndEducation(newDB.FindJobID(loggedInUserId), SeekerLicenseChoice(), SeekerEducationChoice());
     }
+
+
     public bool LoginJobSeeker(string email, string password)
     {
         foreach (var item in newDB.SearchSeekerInDB())
@@ -41,6 +44,7 @@ public class MainLogic
             if (item.Seeker_email.Contains(email) && item.Password.Contains(password))
             {
                 loggedInUserId = item.Seeker_id;
+                newDB.CompareJobToSeeker();
                 return true;
             }
         }
@@ -71,4 +75,6 @@ public class MainLogic
         int stringNew = 4;
         return stringNew;
     }
+
+
 }
