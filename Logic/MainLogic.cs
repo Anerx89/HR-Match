@@ -4,6 +4,10 @@ namespace Logic;
 public class MainLogic
 {
     MainDBFunc newDB = new();
+    SeekerDB seekerDB = new();
+    CompanyDB companyDB = new();
+    JobDB jobDB = new();
+
     int loggedInUserId = 0;
 
     public bool CreateNewJobSeeker(string name, int age, string email, string password, string exp)
@@ -11,8 +15,8 @@ public class MainLogic
         if (password.Length >= 2 && !password.Contains(" "))//Dont forget to change!!!
         {
             Seeker newJS = new(name, age, email, password, exp);
-            newDB.AddJobSeekerToDB(newJS);
-            newDB.AddSeekerLicenseAndEducation(newDB.FindSeekerID(name), SeekerLicenseChoice(), SeekerEducationChoice());
+            seekerDB.AddJobSeekerToDB(newJS);
+            seekerDB.AddSeekerLicenseAndEducation(seekerDB.FindSeekerID(name), SeekerLicenseChoice(), SeekerEducationChoice());
             return true;
         }
         return false;
@@ -23,7 +27,7 @@ public class MainLogic
         if (password.Length >= 2 && !password.Contains(" "))
         {
             Company newComp = new(name, location, workArea, email, password);
-            newDB.AddCompanyToDB(newComp);
+            companyDB.AddCompanyToDB(newComp);
             return true;
         }
         return false;
@@ -32,19 +36,19 @@ public class MainLogic
     public void CreateNewJob(string title, string description, string location)
     {
         Job newJob = new(loggedInUserId, title, description, location);
-        newDB.AddJobToDB(newJob);
-        newDB.AddJobLicenseAndEducation(newDB.FindJobID(loggedInUserId), SeekerLicenseChoice(), SeekerEducationChoice());
+        jobDB.AddJobToDB(newJob);
+        jobDB.AddJobLicenseAndEducation(jobDB.FindJobID(loggedInUserId), SeekerLicenseChoice(), SeekerEducationChoice());
     }
 
 
     public bool LoginJobSeeker(string email, string password)
     {
-        foreach (var item in newDB.SearchSeekerInDB())
+        foreach (var item in seekerDB.SearchSeekerInDB())
         {
             if (item.Seeker_email.Contains(email) && item.Password.Contains(password))
             {
                 loggedInUserId = item.Seeker_id;
-                newDB.CompareJobToSeeker();
+                seekerDB.CompareJobToSeeker();
                 return true;
             }
         }
@@ -52,7 +56,7 @@ public class MainLogic
     }
     public bool LoginCompany(string email, string password)
     {
-        foreach (var item in newDB.SearchCompanyInDB())
+        foreach (var item in companyDB.SearchCompanyInDB())
         {
             if (item.C_email.Contains(email) && item.Password.Contains(password))
             {
