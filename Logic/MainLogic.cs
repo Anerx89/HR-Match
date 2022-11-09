@@ -49,6 +49,7 @@ public class MainLogic
             {
                 loggedInUserId = item.Seeker_id;
                 seekerDB.GetSeekerLicense(loggedInUserId);
+                newDB.GetJobLicense(loggedInUserId);
                 return true;
             }
         }
@@ -71,13 +72,25 @@ public class MainLogic
 
     public int SeekerLicenseChoice()
     {
-        int stringNew = 4;
+        int stringNew = 2;
         return stringNew;
     }
     public int SeekerEducationChoice()
     {
         int stringNew = 4;
         return stringNew;
+    }
+
+    public void CompareSeekerToJob(List<int> seekerLicense, List<int> jobLicense)
+    {
+        List<Job> matchingJobs = new();
+        foreach (var license in jobLicense)
+        {
+            if (seekerLicense.Contains(license))
+            {
+
+            }
+        }
     }
 
 

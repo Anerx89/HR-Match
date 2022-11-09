@@ -50,7 +50,7 @@ public class SeekerDB
         return seekerID;
     }
 
-    public void GetSeekerLicense(int loggedInSeeker)//this function needs some love.
+    public List<int> GetSeekerLicense(int loggedInSeeker)//this function needs some love.
     {
         List<int> seekerLicense = new();
         var connection = new MySqlConnection(sqlString);
@@ -62,5 +62,6 @@ public class SeekerDB
                 seekerLicense.Add(user.License_id);
             }
         }
+        return seekerLicense;
     }
 }

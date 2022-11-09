@@ -38,14 +38,5 @@ public class JobDB
         connection.Execute(sqlQuery2);
     }
 
-    public void GetJobLicense()
-    {
-        List<int> jobLicense = new();
-        var connection = new MySqlConnection(sqlString);
-        var jobs = connection.Query<Job>("SELECT job_id AS Job_id, license_id AS License_id FROM job_license;").ToList();
-        foreach (var job in jobs)
-        {
-            jobLicense.Add(job.License_id);
-        }
-    }
+
 }
