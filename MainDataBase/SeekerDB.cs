@@ -50,26 +50,17 @@ public class SeekerDB
         return seekerID;
     }
 
-    public void CompareJobToSeeker()//this function needs some love.
+    public void GetSeekerLicense(int loggedInSeeker)//this function needs some love.
     {
-        List<int> firstSearch = new();
+        List<int> seekerLicense = new();
         var connection = new MySqlConnection(sqlString);
-        var jobs = connection.Query<Job>("SELECT job_id AS Job_id, license_id AS License_id FROM job_license;").ToList();
         var seeker = connection.Query<Seeker>("SELECT seeker_id AS Seeker_id, license_id AS License_id FROM seeker_license;").ToList();
-        foreach (var job in jobs)
+        foreach (var user in seeker)
         {
-            foreach (var User in seeker)
+            if (user.Seeker_id == loggedInSeeker)
             {
-                if (job.License_id == User.License_id)
-                {
-                    firstSearch.Add(job.Job_id);
-                }
+                seekerLicense.Add(user.License_id);
             }
         }
-        foreach (var item in firstSearch)
-        {
-            Console.WriteLine(item.ToString());
-        }
-        Console.ReadLine();
     }
 }

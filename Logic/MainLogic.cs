@@ -48,7 +48,7 @@ public class MainLogic
             if (item.Seeker_email.Contains(email) && item.Password.Contains(password))
             {
                 loggedInUserId = item.Seeker_id;
-                seekerDB.CompareJobToSeeker();
+                seekerDB.GetSeekerLicense(loggedInUserId);
                 return true;
             }
         }
