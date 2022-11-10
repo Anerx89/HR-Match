@@ -1,4 +1,4 @@
-using Logic;
+namespace Logic;
 using ClassHolder;
 using MainDataBase;
 
@@ -6,7 +6,7 @@ public class SeekerLogic
 {
 
     SeekerDB seekerDB = new();
-    MainDBFunc newDB = new();
+    JobDB newJobDB = new();
     int loggedInSeekerId = 0;
 
     public bool CreateNewJobSeeker(string name, int age, string email, string password, string exp)
@@ -28,7 +28,7 @@ public class SeekerLogic
             {
                 loggedInSeekerId = item.Seeker_id;
                 seekerDB.GetSeekerLicense(loggedInSeekerId);
-                newDB.GetJobLicense(loggedInSeekerId);
+                newJobDB.GetJobLicense(loggedInSeekerId);
                 return true;
             }
         }

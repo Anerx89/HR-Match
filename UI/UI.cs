@@ -2,7 +2,6 @@ using Logic;
 
 class UI
 {
-    MainLogic newLogic = new();
     SeekerLogic newSeeker = new();
     CompanyLogic newCompany = new();
     JobLogic newJob = new();
