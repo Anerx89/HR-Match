@@ -1,3 +1,4 @@
+using ClassHolder;
 public class Company : IsData
 {
     public int C_id { get; set; }

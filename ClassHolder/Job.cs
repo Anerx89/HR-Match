@@ -1,3 +1,4 @@
+using ClassHolder;
 public class Job
 {
     public int Company_id { get; set; }

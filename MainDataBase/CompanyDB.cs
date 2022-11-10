@@ -1,7 +1,7 @@
 using Dapper;
 using MySqlConnector;
+using MainDataBase;
 
-namespace MainDataBase;
 public class CompanyDB
 {
     protected string sqlString = "Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;";

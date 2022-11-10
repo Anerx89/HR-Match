@@ -1,7 +1,6 @@
 using Dapper;
 using MySqlConnector;
-
-namespace MainDataBase;
+using MainDataBase;
 
 public class JobDB
 {

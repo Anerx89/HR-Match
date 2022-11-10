@@ -1,3 +1,5 @@
+namespace ClassHolder;
+
 public class Seeker : IsData
 {
     public int Seeker_id { get; set; }
@@ -13,6 +15,7 @@ public class Seeker : IsData
     {
 
     }
+
     public Seeker(string name, int age, string email, string pass, string exp)
     {
         Seeker_name = name;
