@@ -5,7 +5,7 @@ using MainDataBase;
 public class CompanyLogic
 {
     CompanyDB newCompanyDB = new();
-    public int loggedInCompanyId = 0;
+    public static int loggedInCompanyId = 0;
 
     public bool CreateNewCompany(string name, string location, string workArea, string email, string password)
     {

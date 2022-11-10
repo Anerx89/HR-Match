@@ -6,8 +6,6 @@ using MainDataBase;
 public class SeekerDB
 {
 
-
-
     public void AddJobSeekerToDB(IsData newJobSeeker)
     {
         var connection = new MySqlConnection(MainDBFunc.sqlString);
