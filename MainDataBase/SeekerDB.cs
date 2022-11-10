@@ -63,4 +63,11 @@ public class SeekerDB
         }
         return seekerLicense;
     }
+
+    public void AddToSeeker_Job(int seekerID, int jobID)
+    {
+        var connection = new MySqlConnection(sqlString);
+        string sqlQuery = $"INSERT INTO seeker_job (seeker_id, job_id) VALUES ({seekerID}, {jobID});";
+        connection.Execute(sqlQuery);
+    }
 }
