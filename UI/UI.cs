@@ -1,9 +1,11 @@
 using Logic;
+using MainDataBase;
 
 class UI
 {
     SeekerLogic newSeeker = new();
     CompanyLogic newCompany = new();
+
     JobLogic newJob = new();
 
     public void Menu()
@@ -122,7 +124,8 @@ class UI
                 string password = Console.ReadLine();
                 if (newCompany.LoginCompany(email, password))
                 {
-                    RegisterNewJob();
+                    CompanyDB newCompanyDB = new();
+                    newCompanyDB.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId);
                 }
                 else
                 {

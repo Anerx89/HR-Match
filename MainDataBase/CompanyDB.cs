@@ -1,6 +1,7 @@
 using Dapper;
 using MySqlConnector;
 using MainDataBase;
+using ClassHolder;
 
 public class CompanyDB
 {
@@ -22,6 +23,19 @@ public class CompanyDB
             loggedInCompany.Add(c);
         }
         return loggedInCompany;
+    }
+
+    public List<int> GetSeekersThatApplyToJob(int companyID)
+    {
+        List<int> seekerApply = new();
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        var seekers = connection.Query<Seeker>($"SELECT seeker_id as Seeker_id FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
+
+        foreach (var seeker in seekers)
+        {
+            seekerApply.Add(seeker.Seeker_id);
+        }
+        return seekerApply;
     }
 
 

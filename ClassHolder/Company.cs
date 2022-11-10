@@ -21,4 +21,9 @@ public class Company : IsData
         C_email = email;
         Password = pass;
     }
+
+    public override string ToString()
+    {
+        return $"Company name: {C_name}, Company Location: {C_location}, Company Working Area: {C_work_area}";
+    }
 }
