@@ -7,7 +7,7 @@ public class SeekerLogic
 
     SeekerDB seekerDB = new();
     JobDB newJobDB = new();
-    int loggedInSeekerId = 0;
+    public int loggedInSeekerId = 0;
 
     public bool CreateNewJobSeeker(string name, int age, string email, string password, string exp)
     {

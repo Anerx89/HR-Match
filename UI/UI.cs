@@ -27,7 +27,7 @@ class UI
             }
             else if (inputKey == ConsoleKey.D3)
             {
-                RegisterNewJob();
+                RegisterNewCompany();
 
             }
             else if (inputKey == ConsoleKey.Q)
@@ -76,11 +76,11 @@ class UI
 
     public void RegisterNewJob()
     {
-        Console.Write("Please enter your company name:");
+        Console.Write("Please enter job title:");
         string title = Console.ReadLine();
-        Console.Write("Please enter your location:");
+        Console.Write("Please enter job location:");
         string description = Console.ReadLine();
-        Console.Write("Please enter your working area:");
+        Console.Write("Please enter working area:");
         string location = Console.ReadLine();
 
 
