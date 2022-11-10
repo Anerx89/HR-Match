@@ -3,6 +3,10 @@ using Logic;
 class UI
 {
     MainLogic newLogic = new();
+    SeekerLogic newSeeker = new();
+    CompanyLogic newCompany = new();
+    JobLogic newJob = new();
+
     public void Menu()
     {
         bool isRunning = true;
@@ -51,7 +55,7 @@ class UI
         Console.Write("Please enter your experience:");
         string exp = Console.ReadLine();
 
-        newLogic.CreateNewJobSeeker(name, age, email, password, exp);
+        newSeeker.CreateNewJobSeeker(name, age, email, password, exp);
 
     }
     public void RegisterNewCompany()
@@ -67,7 +71,7 @@ class UI
         Console.Write("Please enter your password:");
         string password = Console.ReadLine();
 
-        newLogic.CreateNewCompany(name, location, work_area, email, password);
+        newCompany.CreateNewCompany(name, location, work_area, email, password);
 
     }
 
@@ -81,7 +85,7 @@ class UI
         string location = Console.ReadLine();
 
 
-        newLogic.CreateNewJob(title, description, location);
+        newJob.CreateNewJob(title, description, location);
     }
 
     public void LoginMenu()
@@ -100,7 +104,7 @@ class UI
                 string email = Console.ReadLine();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
-                if (newLogic.LoginJobSeeker(email, password))
+                if (newSeeker.LoginJobSeeker(email, password))
                 {
 
                 }
@@ -117,7 +121,7 @@ class UI
                 string email = Console.ReadLine();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
-                if (newLogic.LoginCompany(email, password))
+                if (newCompany.LoginCompany(email, password))
                 {
                     RegisterNewJob();
                 }
