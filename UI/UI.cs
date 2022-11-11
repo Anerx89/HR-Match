@@ -57,7 +57,6 @@ class UI
         string exp = Console.ReadLine();
 
         newSeeker.CreateNewJobSeeker(name, age, email, password, exp);
-
     }
     public void RegisterNewCompany()
     {
@@ -88,7 +87,41 @@ class UI
 
         newJob.CreateNewJob(title, description, location);
     }
-
+    public int ChooseLicenseToJob()
+    {
+        int licenseType = 0;
+        while (true)
+        {
+            Console.WriteLine("Choose a  driver license requirement for the job: ");
+            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|3| - No Requirements.");
+            ConsoleKey licenseChoice = Console.ReadKey().Key;
+            if (licenseChoice == ConsoleKey.D1)
+            {
+                licenseType = (int)License.A;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D2)
+            {
+                licenseType = (int)License.B;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D3)
+            {
+                licenseType = (int)License.C;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D4)
+            {
+                licenseType = (int)License.none;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input. Try again.");
+            }
+        }
+        return licenseType;
+    }
     public void LoginMenu()
     {
         bool isRunning = true;
