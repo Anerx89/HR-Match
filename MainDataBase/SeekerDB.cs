@@ -75,11 +75,11 @@ public class SeekerDB
     {
         List<int> seekerApply = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
-        var jobs = connection.Query<Seeker>($"SELECT * FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
+        var jobs = connection.Query<Job>($"SELECT * FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
 
         foreach (var job in jobs)
         {
-            seekerApply.Add(job.Seeker_id);
+            seekerApply.Add(job.Job_id);
         }
         return seekerApply;
     }
