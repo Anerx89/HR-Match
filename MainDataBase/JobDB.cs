@@ -41,10 +41,15 @@ public class JobDB
         List<int> jobID = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
         var jobs = connection.Query<Job>($"SELECT job_id AS Job_id FROM job_license jl INNER JOIN seeker_license sl ON jl.license_id = sl.license_id WHERE seeker_id={seekerID};").ToList();
+        var education = connection.Query<Job>($"SELECT job_id AS Job_id FROM job_education jl INNER JOIN seeker_education sl ON jl.education_id = sl.education_id WHERE seeker_id={seekerID};").ToList();
 
         foreach (var job in jobs)
         {
             jobID.Add(job.Job_id);
+        }
+        foreach (var ed in education)
+        {
+            jobID.Add(ed.Job_id);
         }
         return jobID;
     }
