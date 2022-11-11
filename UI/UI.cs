@@ -118,7 +118,12 @@ class UI
                         if (seekerMenuKey == ConsoleKey.D1)
                         {
                             SeekerDB seeker_job = new();
-                            seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId);
+                            foreach (var job in seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId))
+                            {
+                                Console.WriteLine(job);
+                            }
+                            Console.ReadKey();
+
                         }
                         else if (seekerMenuKey == ConsoleKey.D2)
                         {
