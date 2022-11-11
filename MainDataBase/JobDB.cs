@@ -51,6 +51,7 @@ public class JobDB
         {
             jobID.Add(ed.Job_id);
         }
-        return jobID;
+        List<int> cleanedIdList = jobID.Distinct().ToList();
+        return cleanedIdList;
     }
 }
