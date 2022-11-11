@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\MainDataBase\MainDataBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>
