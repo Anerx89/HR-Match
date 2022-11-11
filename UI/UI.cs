@@ -138,8 +138,42 @@ class UI
                 string email = Console.ReadLine();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
+
                 if (newSeeker.LoginJobSeeker(email, password))
                 {
+                    Console.Clear();
+                    bool SeekerMenu = true;
+                    while (SeekerMenu == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("|1| - Show job history\n|2| - Apply for job");
+                        ConsoleKey seekerMenuKey = Console.ReadKey().Key;
+                        if (seekerMenuKey == ConsoleKey.D1)
+                        {
+                            SeekerDB seeker_job = new();
+                            foreach (var job in seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId))
+                            {
+                                Console.WriteLine(job);
+                            }
+                            Console.ReadKey();
+
+                        }
+                        else if (seekerMenuKey == ConsoleKey.D2)
+                        {
+                            SeekerDB seeker_job = new();
+                            JobDB job_seeker = new();
+
+                            foreach (var job in job_seeker.GetJobRequirements(SeekerLogic.loggedInSeekerId))
+                            {
+                                Console.WriteLine(job);
+                            }
+
+                            Console.WriteLine("Enter the ID of the job you want to apply for");
+                            int SeekerApply = Convert.ToInt32(Console.ReadLine());
+                            seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
+                        }
+                    }
+
 
                 }
                 else
@@ -177,6 +211,12 @@ class UI
             }
         }
     }
+
+    public void SeekerMenu()
+    {
+
+    }
+
     public void LoginUser()
     {
 
