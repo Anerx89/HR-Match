@@ -36,7 +36,7 @@ public class JobDB
         connection.Execute(sqlQuery2);
     }
 
-    public List<int> GetJobLicense(int seekerID)
+    public List<int> GetJobRequirements(int seekerID)
     {
         List<int> jobID = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
@@ -45,11 +45,7 @@ public class JobDB
         foreach (var job in jobs)
         {
             jobID.Add(job.Job_id);
-            Console.WriteLine(job.Job_id.ToString());
         }
-        Console.ReadLine();
         return jobID;
     }
-
-
 }

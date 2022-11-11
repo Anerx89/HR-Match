@@ -70,4 +70,17 @@ public class SeekerDB
         string sqlQuery = $"INSERT INTO seeker_job (seeker_id, job_id) VALUES ({seekerID}, {jobID});";
         connection.Execute(sqlQuery);
     }
+
+    public List<int> GetSeekerApplyHistory(int seekerID)
+    {
+        List<int> seekerApply = new();
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        var jobs = connection.Query<Seeker>($"SELECT job_id as Job_id FROM seeker_job sj INNER JOIN seeker s ON sj.job_id = s.seeker_id WHERE s.seeker_id ={seekerID};").ToList();
+
+        foreach (var job in jobs)
+        {
+            seekerApply.Add(job.Seeker_id);
+        }
+        return seekerApply;
+    }
 }

@@ -20,7 +20,7 @@ public class SeekerLogic
         }
         return false;
     }
-    public bool LoginJobSeeker(string email, string password)
+    public bool LoginJobSeeker(string email, string password) // FIXA EN MENY DÄR MAN KAN VÄLJA ATT SÖKA OLIKA JOBB
     {
         foreach (var item in seekerDB.SearchSeekerInDB())
         {
@@ -28,7 +28,7 @@ public class SeekerLogic
             {
                 loggedInSeekerId = item.Seeker_id;
                 seekerDB.GetSeekerLicense(loggedInSeekerId);
-                newJobDB.GetJobLicense(loggedInSeekerId);
+                newJobDB.GetJobRequirements(loggedInSeekerId);
                 return true;
             }
         }
