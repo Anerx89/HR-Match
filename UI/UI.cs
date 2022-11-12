@@ -195,8 +195,6 @@ class UI
                     bool companyLoop = true;
                     while (companyLoop)
                     {
-
-
                         CompanyDB newCompanyDB = new();
                         Console.Clear();
                         Console.WriteLine("|1| - Register new job\n|2| - See applications\n|3| - Delete job\n|4| - Delete account\n|Q| - To exit any time");
@@ -223,7 +221,6 @@ class UI
                         }
                         else if (input == ConsoleKey.D3)
                         {
-
                             Console.Clear();
                             Console.WriteLine("Jobs to delete:");
                             foreach (var job in newCompanyDB.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
