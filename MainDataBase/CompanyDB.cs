@@ -50,9 +50,11 @@ public class CompanyDB
         connection.QueryMultiple($"DELETE FROM `job_education` WHERE {jobID};DELETE FROM `job_license` WHERE {jobID};DELETE FROM `job` WHERE job.job_id={jobID};");
     }
 
-
-
-
+    public void DeleteCompany(int companyID)
+    {
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        connection.QueryMultiple($"DELETE FROM `job_education` WHERE {companyID};DELETE FROM `job_license` WHERE {companyID};DELETE FROM `job` WHERE job.company_id={companyID};DELETE FROM `company` WHERE company.c_id={companyID}");
+    }
 
     public List<Job> ListCompanyJobs(int companyID)
     {

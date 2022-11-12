@@ -21,6 +21,6 @@ public class Job
     }
     public override string ToString()
     {
-        return $"{Job_id}: {Job_title} {Job_description} {Job_location}";
+        return $"Job ID | {Job_id} | {Job_title} {Job_description} {Job_location}";
     }
 }
