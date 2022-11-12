@@ -19,8 +19,8 @@ public class Job
         Job_description = description;
         Job_location = location;
     }
-    // public override string ToString()
-    // {
-    //     return $"{Job_title} {Job_description}";
-    // }
+    public override string ToString()
+    {
+        return $"{Job_id}: {Job_title} {Job_description} {Job_location}";
+    }
 }

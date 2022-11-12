@@ -25,17 +25,40 @@ public class CompanyDB
         return loggedInCompany;
     }
 
-    public List<int> GetSeekersThatApplyToJob(int companyID)
+    public List<Seeker> GetSeekersThatApplyToJob(int companyID)
     {
-        List<int> seekerApply = new();
+        List<Seeker> seekerApply = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
-        var seekers = connection.Query<Seeker>($"SELECT seeker_id as Seeker_id FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
-
-        foreach (var seeker in seekers)
+        var seekers_job = connection.Query<Seeker>($"SELECT seeker_id as Seeker_id FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
+        var seekers = connection.Query<Seeker>($"SELECT * FROM `seeker`");
+        foreach (var seekerId in seekers_job)
         {
-            seekerApply.Add(seeker.Seeker_id);
+            foreach (var seeker in seekers)
+            {
+                if (seekerId.Seeker_id == seeker.Seeker_id)
+                {
+                    seekerApply.Add(seeker);
+                }
+            }
         }
         return seekerApply;
+    }
+
+    public void DeleteJobDB(int companyID, int jobID)
+    {
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        connection.QueryMultiple($"DELETE FROM `job_education` WHERE {jobID};DELETE FROM `job_license` WHERE {jobID};DELETE FROM `job` WHERE job.job_id={jobID};");
+    }
+
+
+
+
+
+    public List<Job> ListCompanyJobs(int companyID)
+    {
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        var jobs = connection.Query<Job>($"SELECT * FROM `job` WHERE job.company_id={companyID}").ToList();
+        return jobs;
     }
 
 
