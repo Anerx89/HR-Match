@@ -226,14 +226,79 @@ class UI
             }
             else if (inputKey == ConsoleKey.D2)
             {
+                Console.Clear();
                 Console.Write("Please enter your email:");
                 string email = Console.ReadLine();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
                 if (newCompany.LoginCompany(email, password))
                 {
-                    CompanyDB newCompanyDB = new();
-                    newCompanyDB.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId);
+                    bool companyLoop = true;
+                    while (companyLoop)
+                    {
+                        CompanyDB newCompanyDB = new();
+                        Console.Clear();
+                        Console.WriteLine("|1| - Register new job\n|2| - See applications\n|3| - Delete job\n|4| - Delete account\n|Q| - To exit any time");
+                        ConsoleKey input = Console.ReadKey().Key;
+
+
+                        if (input == ConsoleKey.D1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("register");
+                            RegisterNewJob();
+                            ChooseLicenseToJob();
+                            Console.ReadLine();
+                        }
+                        else if (input == ConsoleKey.D2)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("List of Applicants");
+                            foreach (var seeker in newCompanyDB.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId))
+                            {
+                                Console.WriteLine(seeker.ToString());
+                            }
+                            Console.ReadLine();
+                        }
+                        else if (input == ConsoleKey.D3)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Jobs to delete:");
+                            foreach (var job in newCompanyDB.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
+                            {
+                                Console.WriteLine(job.ToString());
+                            }
+                            Console.Write("Please enter id to delete: ");
+                            int jobId = Convert.ToInt32(Console.ReadLine());
+                            newCompanyDB.DeleteJobDB(CompanyLogic.loggedInCompanyId, jobId);
+                            Console.Write("Delete successful.");
+                            Console.ReadLine();
+                        }
+                        else if (input == ConsoleKey.D4)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Are you sure you want to delete your account?");
+                            Console.WriteLine("|1| - Delete\n|2| - Go Back\n");
+                            ConsoleKey choice = Console.ReadKey().Key;
+                            if (choice == ConsoleKey.D1)
+                            {
+                                Console.Clear();
+                                newCompanyDB.DeleteCompany(CompanyLogic.loggedInCompanyId);
+                                Console.WriteLine("Account is deleted.\nPress any key to go back to main menu");
+                                Console.ReadLine();
+                                Menu();
+                            }
+                        }
+                        else if (input == ConsoleKey.Q)
+                        {
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please try again");
+                        }
+                    }
+
                 }
                 else
                 {
