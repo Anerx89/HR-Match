@@ -83,9 +83,11 @@ class UI
         string description = Console.ReadLine();
         Console.Write("Please enter working area:");
         string location = Console.ReadLine();
+        int license = ChooseLicenseToJob();
+        int education = ChooseEducationToJob();
 
 
-        newJob.CreateNewJob(title, description, location);
+        newJob.CreateNewJob(title, description, location, license, education);
     }
     public int ChooseLicenseToJob()
     {
@@ -93,7 +95,7 @@ class UI
         while (true)
         {
             Console.WriteLine("Choose a  driver license requirement for the job: ");
-            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|3| - No Requirements.");
+            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|3| - No Requirements");
             ConsoleKey licenseChoice = Console.ReadKey().Key;
             if (licenseChoice == ConsoleKey.D1)
             {
@@ -121,6 +123,45 @@ class UI
             }
         }
         return licenseType;
+    }
+    public int ChooseEducationToJob()
+    {
+        int educationType = 0;
+        while (true)
+        {
+            Console.WriteLine("Choose a  driver license requirement for the job: ");
+            Console.WriteLine("|1| - Gymnasium\n|2| - Universitet\n|3| - Yrkeshögskola\n|4| - Folkhögskola\n|5| - No Requirements");
+            ConsoleKey educationChoice = Console.ReadKey().Key;
+            if (educationChoice == ConsoleKey.D1)
+            {
+                educationType = (int)Education.Gymnasium;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D2)
+            {
+                educationType = (int)Education.Universitet;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D3)
+            {
+                educationType = (int)Education.Yrkeshögskola;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D4)
+            {
+                educationType = (int)Education.Folkhögskola;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D5)
+            {
+                educationType = (int)Education.none;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input. Try again.");
+            }
+        }
+        return educationType;
     }
     public void LoginMenu()
     {

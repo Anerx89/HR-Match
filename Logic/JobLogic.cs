@@ -7,10 +7,10 @@ public class JobLogic
     SeekerLogic neS = new();
 
 
-    public void CreateNewJob(string title, string description, string location)
+    public void CreateNewJob(string title, string description, string location, int license, int education)
     {
         Job newJob = new(CompanyLogic.loggedInCompanyId, title, description, location);
         newJobDB.AddJobToDB(newJob);
-        newJobDB.AddJobLicenseAndEducation(newJobDB.FindJobID(CompanyLogic.loggedInCompanyId), neS.SeekerLicenseChoice(), neS.SeekerEducationChoice());
+        newJobDB.AddJobLicenseAndEducation(newJobDB.FindJobID(CompanyLogic.loggedInCompanyId), license, education);
     }
 }
