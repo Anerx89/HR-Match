@@ -45,6 +45,7 @@ class UI
 
     public void RegisterNewJobSeeker()
     {
+        Console.Clear();
         Console.Write("Please enter your name:");
         string name = Console.ReadLine();
         Console.Write("Please enter your age:");
@@ -53,11 +54,93 @@ class UI
         string email = Console.ReadLine();
         Console.Write("Please enter your password:");
         string password = Console.ReadLine();
-        Console.Write("Please enter your experience:");
+        Console.Write("Write a short summary of your job experiecence:");
         string exp = Console.ReadLine();
+        int license = ChooseLicenseToSeeker();
+        int education = ChooseEducationToSeeker();
 
-        newSeeker.CreateNewJobSeeker(name, age, email, password, exp);
+        newSeeker.CreateNewJobSeeker(name, age, email, password, exp, license, education);
     }
+
+    public int ChooseLicenseToSeeker()
+    {
+        int licenseType = 0;
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Wich drivers license do you have?: ");
+            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|4| - I have no drivers license");
+            ConsoleKey licenseChoice = Console.ReadKey().Key;
+            if (licenseChoice == ConsoleKey.D1)
+            {
+                licenseType = (int)License.A;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D2)
+            {
+                licenseType = (int)License.B;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D3)
+            {
+                licenseType = (int)License.C;
+                break;
+            }
+            else if (licenseChoice == ConsoleKey.D4)
+            {
+                licenseType = (int)License.none;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input. Try again.");
+            }
+        }
+        return licenseType;
+    }
+
+    public int ChooseEducationToSeeker()
+    {
+        int educationType = 0;
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("What level of education do you have?: ");
+            Console.WriteLine("|1| - Gymnasium\n|2| - Universitet\n|3| - Yrkeshögskola\n|4| - Folkhögskola\n|5| - I have no education");
+            ConsoleKey educationChoice = Console.ReadKey().Key;
+            if (educationChoice == ConsoleKey.D1)
+            {
+                educationType = (int)Education.Gymnasium;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D2)
+            {
+                educationType = (int)Education.Universitet;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D3)
+            {
+                educationType = (int)Education.Yrkeshögskola;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D4)
+            {
+                educationType = (int)Education.Folkhögskola;
+                break;
+            }
+            else if (educationChoice == ConsoleKey.D5)
+            {
+                educationType = (int)Education.none;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input. Try again.");
+            }
+        }
+        return educationType;
+    }
+
     public void RegisterNewCompany()
     {
         Console.Write("Please enter your company name:");

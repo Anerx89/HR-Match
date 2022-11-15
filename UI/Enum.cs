@@ -4,7 +4,6 @@ public enum License
     A,
     B,
     C,
-    Pilot
 }
 
 public enum Education
@@ -14,5 +13,4 @@ public enum Education
     Universitet,
     Yrkeshögskola,
     Folkhögskola,
-
 }
