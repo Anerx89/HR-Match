@@ -49,7 +49,7 @@ public class SeekerDB
         return seekerID;
     }
 
-    public List<int> GetSeekerLicense(int loggedInSeeker)//this function needs some love.
+    public List<int> GetSeekerLicense(int loggedInSeeker)
     {
         List<int> seekerLicense = new();
         var connection = new MySqlConnection(sqlString);
@@ -69,6 +69,19 @@ public class SeekerDB
         var connection = new MySqlConnection(sqlString);
         string sqlQuery = $"INSERT INTO seeker_job (seeker_id, job_id) VALUES ({seekerID}, {jobID});";
         connection.Execute(sqlQuery);
+    }
+
+    public void RemoveFromSeeker_Job(int seekerID, int jobID)
+    {
+        var connection = new MySqlConnection(sqlString);
+        string sqlQuery = $"DELETE FROM seeker_job WHERE seeker_id={seekerID} AND job_id={jobID};";
+        connection.Execute(sqlQuery);
+    }
+
+    public void DeleteSeeker(int seekerID)
+    {
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        connection.QueryMultiple($"DELETE FROM `seeker_job` WHERE {seekerID};DELETE FROM `seeker_education` WHERE {seekerID};DELETE FROM `seeker_license` WHERE {seekerID};DELETE FROM `seeker` WHERE seeker_id={seekerID}");
     }
 
     public List<int> GetSeekerApplyHistory(int seekerID)

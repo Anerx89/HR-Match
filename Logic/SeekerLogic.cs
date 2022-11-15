@@ -11,7 +11,7 @@ public class SeekerLogic
 
     public bool CreateNewJobSeeker(string name, int age, string email, string password, string exp)
     {
-        if (password.Length >= 2 && !password.Contains(" "))//Dont forget to change!!!
+        if (password.Length >= 2 && !password.Contains(" "))
         {
             Seeker newJS = new(name, age, email, password, exp);
             seekerDB.AddJobSeekerToDB(newJS);
@@ -20,7 +20,7 @@ public class SeekerLogic
         }
         return false;
     }
-    public bool LoginJobSeeker(string email, string password) // FIXA EN MENY DÄR MAN KAN VÄLJA ATT SÖKA OLIKA JOBB
+    public bool LoginJobSeeker(string email, string password)
     {
         foreach (var item in seekerDB.SearchSeekerInDB())
         {

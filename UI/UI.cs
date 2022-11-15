@@ -187,34 +187,74 @@ class UI
                     while (SeekerMenu == true)
                     {
                         Console.Clear();
-                        Console.WriteLine("|1| - Show job history\n|2| - Apply for job");
+                        Console.WriteLine("|1| - Apply for job\n|2| - Delete job application\n|3| - Delete Account ");
                         ConsoleKey seekerMenuKey = Console.ReadKey().Key;
-                        if (seekerMenuKey == ConsoleKey.D1)
-                        {
-                            SeekerDB seeker_job = new();
-                            foreach (var job in seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId))
-                            {
-                                Console.WriteLine(job);
-                            }
-                            Console.ReadKey();
 
-                        }
-                        else if (seekerMenuKey == ConsoleKey.D2)
+                        if (seekerMenuKey == ConsoleKey.D1) // ADD A SEEKER TO A JOB
                         {
+                            Console.Clear();
                             SeekerDB seeker_job = new();
                             JobDB job_seeker = new();
 
+                            Console.Write("Available jobs:\n");
                             foreach (var job in job_seeker.GetJobRequirements(SeekerLogic.loggedInSeekerId))
                             {
                                 Console.WriteLine(job);
                             }
 
-                            Console.WriteLine("Enter the ID of the job you want to apply for");
+                            Console.WriteLine("\nEnter the ID of the job you want to apply for");
                             int SeekerApply = Convert.ToInt32(Console.ReadLine());
                             seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
+
+                            Console.Clear();
+                            Console.Write($"\nYou have applied for {SeekerApply}!\nPress any key to continue");
+                            Console.ReadKey();
+                        }
+
+                        else if (seekerMenuKey == ConsoleKey.D2) // DELETE A SEEKER FROM A JOB
+                        {
+                            Console.Clear();
+                            SeekerDB seeker_job = new();
+
+                            Console.Write("Your current applications :\n");
+                            foreach (var job in seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId))
+                            {
+                                Console.WriteLine(job);
+                            }
+
+                            Console.WriteLine("\nEnter the ID of the job you want stop applying for: ");
+                            int SeekerRemove = Convert.ToInt32(Console.ReadLine());
+
+                            Console.Clear();
+                            Console.Write($"Are you sure you want to stop applying for {SeekerRemove}?\n|1| - Delete\n|2| - Go Back");
+                            ConsoleKey confirmKey = Console.ReadKey().Key;
+
+                            if (confirmKey == ConsoleKey.D1)
+                            {
+                                Console.Clear();
+                                seeker_job.RemoveFromSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerRemove);
+                                Console.Write($"You are no longer applying for {SeekerRemove}.\nPress any key to return");
+                                Console.ReadKey();
+                            }
+                        }
+
+                        else if (seekerMenuKey == ConsoleKey.D3) // DELETE SEEKER
+                        {
+                            Console.Clear();
+                            SeekerDB seeker_job = new();
+                            Console.WriteLine("Are you sure you want to delete your account?");
+                            Console.WriteLine("|1| - Delete\n|2| - Go Back\n");
+                            ConsoleKey choice = Console.ReadKey().Key;
+                            if (choice == ConsoleKey.D1)
+                            {
+                                Console.Clear();
+                                seeker_job.DeleteSeeker(SeekerLogic.loggedInSeekerId);
+                                Console.WriteLine("Account is deleted.\nPress any key to go back to main menu");
+                                Console.ReadLine();
+                                Menu();
+                            }
                         }
                     }
-
 
                 }
                 else
