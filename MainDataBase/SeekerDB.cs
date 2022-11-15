@@ -94,6 +94,7 @@ public class SeekerDB
         {
             seekerApply.Add(job.Job_id);
         }
-        return seekerApply;
+        List<int> cleanedIdList = seekerApply.Distinct().ToList();
+        return cleanedIdList;
     }
 }
