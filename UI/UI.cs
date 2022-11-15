@@ -67,7 +67,7 @@ class UI
         Console.Write("Please enter your working area:");
         string work_area = Console.ReadLine();
         Console.Write("Please enter your email:");
-        string email = Console.ReadLine();
+        string email = Console.ReadLine().ToLower();
         Console.Write("Please enter your password:");
         string password = Console.ReadLine();
 
@@ -94,6 +94,7 @@ class UI
         int licenseType = 0;
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Choose a  driver license requirement for the job: ");
             Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|3| - No Requirements");
             ConsoleKey licenseChoice = Console.ReadKey().Key;
@@ -129,6 +130,7 @@ class UI
         int educationType = 0;
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Choose a  driver license requirement for the job: ");
             Console.WriteLine("|1| - Gymnasium\n|2| - Universitet\n|3| - Yrkeshögskola\n|4| - Folkhögskola\n|5| - No Requirements");
             ConsoleKey educationChoice = Console.ReadKey().Key;
@@ -171,7 +173,6 @@ class UI
             Console.Clear();
             Console.WriteLine("|1| - Log in User\n|2| - Login Company");
             ConsoleKey inputKey = Console.ReadKey().Key;
-
 
             if (inputKey == ConsoleKey.D1)
             {
@@ -266,37 +267,35 @@ class UI
             }
             else if (inputKey == ConsoleKey.D2)
             {
+                string[] check = { "", " " };
                 Console.Clear();
                 Console.Write("Please enter your email:");
-                string email = Console.ReadLine();
+                string email = Console.ReadLine().ToLower();
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
-                if (newCompany.LoginCompany(email, password))
+                if (newCompany.LoginCompany(email, password) && email != "" && password != "" && email != " " && password != " ")
                 {
                     bool companyLoop = true;
                     while (companyLoop)
                     {
                         CompanyDB newCompanyDB = new();
                         Console.Clear();
-                        Console.WriteLine("|1| - Register new job\n|2| - See applications\n|3| - Delete job\n|4| - Delete account\n|Q| - To exit any time");
+                        Console.WriteLine("|1| - Register new job\n|2| - See applications\n|3| - Delete job\n|4| - Delete account\n|Q| - To log off");
                         ConsoleKey input = Console.ReadKey().Key;
-
 
                         if (input == ConsoleKey.D1)
                         {
                             Console.Clear();
-                            Console.WriteLine("register");
+                            Console.WriteLine("Register new job.");
                             RegisterNewJob();
-                            ChooseLicenseToJob();
-                            Console.ReadLine();
                         }
                         else if (input == ConsoleKey.D2)
                         {
                             Console.Clear();
                             Console.WriteLine("List of Applicants");
-                            foreach (var seeker in newCompanyDB.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId))
+                            foreach (var seeker in newCompany.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId))
                             {
-                                Console.WriteLine(seeker.ToString());
+                                Console.WriteLine($"Person {seeker.Seeker_name.ToString()} have applied to:");
                             }
                             Console.ReadLine();
                         }
@@ -304,15 +303,26 @@ class UI
                         {
                             Console.Clear();
                             Console.WriteLine("Jobs to delete:");
-                            foreach (var job in newCompanyDB.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
+                            List<int> tempList = new();
+                            foreach (var job in newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
                             {
                                 Console.WriteLine(job.ToString());
+                                tempList.Add(job.Job_id);
                             }
+                            int jobId;
                             Console.Write("Please enter id to delete: ");
-                            int jobId = Convert.ToInt32(Console.ReadLine());
-                            newCompanyDB.DeleteJobDB(CompanyLogic.loggedInCompanyId, jobId);
-                            Console.Write("Delete successful.");
-                            Console.ReadLine();
+                            bool success = int.TryParse(Console.ReadLine(), out jobId);
+                            if (tempList.Contains(jobId) && success)
+                            {
+                                newCompanyDB.DeleteJobDB(CompanyLogic.loggedInCompanyId, jobId);
+                                Console.Write("Delete successful.");
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                Console.Write("Delete was unsuccessful.\nPlease try again.");
+                                Console.ReadLine();
+                            }
                         }
                         else if (input == ConsoleKey.D4)
                         {
@@ -338,14 +348,12 @@ class UI
                             Console.WriteLine("Invalid input. Please try again");
                         }
                     }
-
                 }
                 else
                 {
-                    Console.Write("You are not in");
+                    Console.Write("Wrong email or password!\nPlease try again.");
                     Console.ReadLine();
                 }
-
             }
             else if (inputKey == ConsoleKey.Q)
             {
@@ -356,19 +364,5 @@ class UI
                 Console.WriteLine("Invalid input. Please try again");
             }
         }
-    }
-
-    public void SeekerMenu()
-    {
-
-    }
-
-    public void LoginUser()
-    {
-
-    }
-    public void LoginCompany()
-    {
-
     }
 }
