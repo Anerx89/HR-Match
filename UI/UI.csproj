@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
     <ProjectReference Include="..\MainDataBase\MainDataBase.csproj" />
+    <ProjectReference Include="..\ClassHolder\Classholder.csproj" />
   </ItemGroup>
 
   <ItemGroup>

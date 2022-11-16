@@ -54,7 +54,7 @@ class UI
         string email = Console.ReadLine();
         Console.Write("Please enter your password:");
         string password = Console.ReadLine();
-        Console.Write("Write a short summary of your job experiecence:");
+        Console.Write("Write a short summary of your job experience:");
         string exp = Console.ReadLine();
         int license = ChooseLicenseToSeeker();
         int education = ChooseEducationToSeeker();
