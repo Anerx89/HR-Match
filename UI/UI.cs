@@ -61,15 +61,32 @@ class UI
             Console.Clear();
             Console.WriteLine("Only letters are allowed!\nPress any key to return");
             Console.ReadLine();
-            return;
+            RegisterNewJobSeeker();
         }
-        Console.Clear();
         Console.Write("Please enter your age:");
         int age = Convert.ToInt32(Console.ReadLine());
         Console.Write("Please enter your email:");
         string email = Console.ReadLine();
-        Console.Write("Please enter your password:");
-        string password = Console.ReadLine();
+
+        bool passwordSuccess = false;
+        string password = "";
+        while (!passwordSuccess)
+        {
+            Console.Write("Please enter your password:");
+            string p = Console.ReadLine();
+            bool pwIsAlpha = p.Contains(" ");
+            if (!pwIsAlpha)
+            {
+                password = p;
+                passwordSuccess = true;
+            }
+            else
+            {
+                Console.WriteLine("You cant have spaces in your password.\nTry again.");
+                Console.ReadLine();
+            }
+        }
+
         Console.Write("Write a short summary of your job experience:");
         string exp = Console.ReadLine();
         int license = ChooseLicenseToSeeker();
