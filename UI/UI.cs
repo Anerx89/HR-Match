@@ -62,13 +62,45 @@ class UI
         newSeeker.CreateNewJobSeeker(name, age, email, password, exp, license, education);
     }
 
+    public void RegisterNewCompany()
+    {
+        Console.Write("Please enter your company name:");
+        string name = Console.ReadLine();
+        Console.Write("Please enter your location:");
+        string location = Console.ReadLine();
+        Console.Write("Please enter your working area:");
+        string work_area = Console.ReadLine();
+        Console.Write("Please enter your email:");
+        string email = Console.ReadLine().ToLower();
+        Console.Write("Please enter your password:");
+        string password = Console.ReadLine();
+
+        newCompany.CreateNewCompany(name, location, work_area, email, password);
+
+    }
+
+    public void RegisterNewJob()
+    {
+        Console.Write("Please enter job title:");
+        string title = Console.ReadLine();
+        Console.Write("Please enter job location:");
+        string description = Console.ReadLine();
+        Console.Write("Please enter working area:");
+        string location = Console.ReadLine();
+        int license = ChooseLicenseToJob();
+        int education = ChooseEducationToJob();
+
+
+        newJob.CreateNewJob(title, description, location, license, education);
+    }
+
     public int ChooseLicenseToSeeker()
     {
         int licenseType = 0;
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Wich drivers license do you have?: ");
+            Console.WriteLine("Which drivers license do you have?: ");
             Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|4| - I have no drivers license");
             ConsoleKey licenseChoice = Console.ReadKey().Key;
             if (licenseChoice == ConsoleKey.D1)
@@ -141,37 +173,6 @@ class UI
         return educationType;
     }
 
-    public void RegisterNewCompany()
-    {
-        Console.Write("Please enter your company name:");
-        string name = Console.ReadLine();
-        Console.Write("Please enter your location:");
-        string location = Console.ReadLine();
-        Console.Write("Please enter your working area:");
-        string work_area = Console.ReadLine();
-        Console.Write("Please enter your email:");
-        string email = Console.ReadLine().ToLower();
-        Console.Write("Please enter your password:");
-        string password = Console.ReadLine();
-
-        newCompany.CreateNewCompany(name, location, work_area, email, password);
-
-    }
-
-    public void RegisterNewJob()
-    {
-        Console.Write("Please enter job title:");
-        string title = Console.ReadLine();
-        Console.Write("Please enter job location:");
-        string description = Console.ReadLine();
-        Console.Write("Please enter working area:");
-        string location = Console.ReadLine();
-        int license = ChooseLicenseToJob();
-        int education = ChooseEducationToJob();
-
-
-        newJob.CreateNewJob(title, description, location, license, education);
-    }
     public int ChooseLicenseToJob()
     {
         int licenseType = 0;
@@ -208,6 +209,7 @@ class UI
         }
         return licenseType;
     }
+
     public int ChooseEducationToJob()
     {
         int educationType = 0;
@@ -248,6 +250,7 @@ class UI
         }
         return educationType;
     }
+
     public void LoginMenu()
     {
         bool isRunning = true;
