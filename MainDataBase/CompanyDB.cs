@@ -5,7 +5,6 @@ using ClassHolder;
 
 public class CompanyDB
 {
-
     public void AddCompanyToDB(IsData newComp)
     {
         var connection = new MySqlConnection(SeekerDB.sqlString);
@@ -24,5 +23,4 @@ public class CompanyDB
         var connection = new MySqlConnection(SeekerDB.sqlString);
         connection.QueryMultiple($"DELETE FROM `seeker_job` WHERE {companyID};DELETE FROM `job_education` WHERE {companyID};DELETE FROM `job_license` WHERE {companyID};DELETE FROM `job` WHERE job.company_id={companyID};DELETE FROM `company` WHERE company.c_id={companyID}");
     }
-
 }

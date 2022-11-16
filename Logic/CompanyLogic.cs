@@ -70,5 +70,4 @@ public class CompanyLogic
         var jobs = connection.Query<Job>($"SELECT * FROM `job` WHERE job.company_id={companyID}").ToList();
         return jobs;
     }
-
 }
