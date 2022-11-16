@@ -47,7 +47,23 @@ class UI
     {
         Console.Clear();
         Console.Write("Please enter your name:");
-        string name = Console.ReadLine();
+        string n = Console.ReadLine();
+        string name = "";
+        bool isAlpha = n.All(Char.IsLetter);
+        if (isAlpha)
+        {
+            name = n;
+            Console.WriteLine($"Welcome, {name}!\n");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("Only letters are allowed!\nPress any key to return");
+            Console.ReadLine();
+            return;
+        }
+        Console.Clear();
         Console.Write("Please enter your age:");
         int age = Convert.ToInt32(Console.ReadLine());
         Console.Write("Please enter your email:");
@@ -267,7 +283,7 @@ class UI
                 Console.Write("Please enter your password:");
                 string password = Console.ReadLine();
 
-                if (newSeeker.LoginJobSeeker(email, password))
+                if (newSeeker.LoginJobSeeker(email, password) && email != "" && password != "" && email != " " && password != " ")
                 {
                     Console.Clear();
                     bool SeekerMenu = true;
