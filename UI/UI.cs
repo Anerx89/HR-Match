@@ -88,8 +88,24 @@ class UI
         string work_area = Console.ReadLine();
         Console.Write("Please enter your email:");
         string email = Console.ReadLine().ToLower();
-        Console.Write("Please enter your password:");
-        string password = Console.ReadLine();
+        bool passwordSuccess = false;
+        string password = "";
+        while (!passwordSuccess)
+        {
+            Console.Write("Please enter your password:");
+            string p = Console.ReadLine();
+            bool isAlpha = p.Contains(" ");
+            if (!isAlpha)
+            {
+                password = p;
+                passwordSuccess = true;
+            }
+            else
+            {
+                Console.WriteLine("You cant have spaces in your password.\nTry again.");
+                Console.ReadLine();
+            }
+        }
 
         newCompany.CreateNewCompany(name, location, work_area, email, password);
 
