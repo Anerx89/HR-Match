@@ -35,16 +35,4 @@ public class SeekerLogic
         }
         return false;
     }
-
-    public int SeekerLicenseChoice()
-    {
-        int stringNew = 2;
-        return stringNew;
-    }
-    public int SeekerEducationChoice()
-    {
-        int stringNew = 4;
-        return stringNew;
-    }
-
 }
