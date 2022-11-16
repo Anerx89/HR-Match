@@ -332,10 +332,17 @@ class UI
                             SeekerDB seeker_job = new();
                             JobDB job_seeker = new();
 
+                            List<int> jobIDs = new();
+
                             Console.Write("Available jobs:\n");
                             foreach (var job in job_seeker.GetJobRequirements(SeekerLogic.loggedInSeekerId))
                             {
-                                Console.WriteLine(job);
+                                jobIDs.Add(job);
+                            }
+
+                            foreach (var job in seeker_job.ShowJobName(jobIDs))
+                            {
+                                Console.WriteLine($"{job}");
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
