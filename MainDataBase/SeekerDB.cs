@@ -97,4 +97,15 @@ public class SeekerDB
         List<int> cleanedIdList = seekerApply.Distinct().ToList();
         return cleanedIdList;
     }
+
+    public List<string> ShowJobName(List<int> jobID)
+    {
+        List<string> jobNames = new();
+        foreach (var jobid in jobID)
+        {
+            var connection = new MySqlConnection(SeekerDB.sqlString);
+            jobNames.Add(connection.QuerySingle<string>($"SELECT job_title AS Job_title FROM job WHERE job_id={jobid};"));
+        }
+        return jobNames;
+    }
 }

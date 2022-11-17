@@ -65,7 +65,7 @@ class UI
             RegisterNewJobSeeker();
         }
         Console.Write("Please enter your age:");
-        int age = Convert.ToInt32(Console.ReadLine());
+        int age = isNumbers(Console.ReadLine());
         Console.Write("Please enter your email:");
         string email = Console.ReadLine();
 
@@ -333,10 +333,17 @@ class UI
                             SeekerDB seeker_job = new();
                             JobDB job_seeker = new();
 
+                            List<int> jobIDs = new();
+
                             Console.Write("Available jobs:\n");
                             foreach (var job in job_seeker.GetJobRequirements(SeekerLogic.loggedInSeekerId))
                             {
-                                Console.WriteLine(job);
+                                jobIDs.Add(job);
+                            }
+
+                            foreach (var job in seeker_job.ShowJobName(jobIDs))
+                            {
+                                Console.WriteLine($"{job}");
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
@@ -512,5 +519,24 @@ class UI
                 Console.WriteLine("Invalid input. Please try again");
             }
         }
+    }
+        public static int isNumbers(string input)
+    {   
+        int number;
+        while (true)
+        {
+            bool success = int.TryParse(input, out number);
+            if(success)
+            {
+                break;
+            }
+            else
+            {
+                
+                Console.WriteLine("Age must be a number. Try again: ");
+                input = Console.ReadLine();
+            }
+        }
+        return number;
     }
 }
