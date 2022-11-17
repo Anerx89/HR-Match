@@ -26,7 +26,7 @@ public class SeekerDB
     {
         List<Seeker> loggedInUser = new();
         var connection = new MySqlConnection(sqlString);
-        var data = connection.Query<Seeker>("SELECT seeker_id AS Seeker_id, seeker_email AS Seeker_email, password AS Password FROM seeker;").ToList();
+        var data = connection.Query<Seeker>("SELECT seeker_id AS Seeker_id, seeker_email AS Seeker_email, password AS Password, seeker_name AS Seeker_name FROM seeker;").ToList();
         foreach (Seeker j in data)
         {
             loggedInUser.Add(j);

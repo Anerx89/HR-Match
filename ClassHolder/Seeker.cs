@@ -3,6 +3,7 @@ namespace ClassHolder;
 public class Seeker : IsData
 {
     public int Seeker_id { get; set; }
+    public int Job_id { get; set; }
     public int License_id { get; set; }
     public string Seeker_name { get; set; }
     public int Seeker_age { get; set; }
@@ -26,7 +27,7 @@ public class Seeker : IsData
     }
     public override string ToString()
     {
-        return $"{Seeker_name} {Seeker_age}";
+        return $"{Seeker_name} {Job_id}";
     }
 
 }

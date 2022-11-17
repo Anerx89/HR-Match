@@ -45,23 +45,30 @@ public class CompanyLogic
         return loggedInCompany;
     }
 
-    public List<Seeker> GetSeekersThatApplyToJob(int companyID)
+    // public List<Seeker> GetSeekersThatApplyToCompany(int companyID)
+    // {
+    //     List<Seeker> seekerApply = new();
+    //     var connection = new MySqlConnection(SeekerDB.sqlString);
+    //     var seekers_job = connection.Query<Seeker>($"SELECT * FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
+    //     var seekers = connection.Query<Seeker>($"SELECT * FROM seeker");
+    //     foreach (var seekerId in seekers_job)
+    //     {
+    //         foreach (var seeker in seekers)
+    //         {
+    //             if (seekerId.Seeker_id == seeker.Seeker_id)
+    //             {
+    //                 seekerApply.Add(seekerId);
+    //             }
+    //         }
+    //     }
+    //     return seekerApply;
+    // }
+    public List<Seeker_job> GetSeekersThatApplyToCompany(int companyID)
     {
         List<Seeker> seekerApply = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
-        var seekers_job = connection.Query<Seeker>($"SELECT seeker_id as Seeker_id FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
-        var seekers = connection.Query<Seeker>($"SELECT * FROM `seeker`");
-        foreach (var seekerId in seekers_job)
-        {
-            foreach (var seeker in seekers)
-            {
-                if (seekerId.Seeker_id == seeker.Seeker_id)
-                {
-                    seekerApply.Add(seeker);
-                }
-            }
-        }
-        return seekerApply;
+        var seeker = connection.Query<Seeker_job>($"SELECT * FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
+        return seeker;
     }
 
     public List<Job> ListCompanyJobs(int companyID)

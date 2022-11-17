@@ -1,5 +1,6 @@
 using Logic;
 using MainDataBase;
+using ClassHolder;
 
 class UI
 {
@@ -402,7 +403,6 @@ class UI
             }
             else if (inputKey == ConsoleKey.D2)
             {
-                string[] check = { "", " " };
                 Console.Clear();
                 Console.Write("Please enter your email:");
                 string email = Console.ReadLine().ToLower();
@@ -426,11 +426,24 @@ class UI
                         }
                         else if (input == ConsoleKey.D2)
                         {
+                            SeekerDB sDB = new();
                             Console.Clear();
                             Console.WriteLine("List of Applicants");
-                            foreach (var seeker in newCompany.GetSeekersThatApplyToJob(CompanyLogic.loggedInCompanyId))
+                            List<Seeker_job> seeker_job = newCompany.GetSeekersThatApplyToCompany(CompanyLogic.loggedInCompanyId);
+                            List<Seeker> listOfSeeker = sDB.SearchSeekerInDB();
+                            List<Job> listOfCompanyJobs = newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId);
+                            foreach (var job in seeker_job)
                             {
-                                Console.WriteLine($"Person {seeker.Seeker_name.ToString()} have applied to:");
+                                foreach (var seeker in listOfSeeker)
+                                {
+                                    foreach (var jobb in listOfCompanyJobs)
+                                    {
+                                        if (job.Seeker_id == seeker.Seeker_id && job.Job_id == jobb.Job_id)
+                                        {
+                                            Console.WriteLine($"{seeker.Seeker_name} have applied for {jobb.Job_title} job.");
+                                        }
+                                    }
+                                }
                             }
                             Console.ReadLine();
                         }
