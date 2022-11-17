@@ -439,15 +439,15 @@ class UI
                             List<Seeker_job> seeker_job = newCompany.GetSeekersThatApplyToCompany(CompanyLogic.loggedInCompanyId);
                             List<Seeker> listOfSeeker = sDB.SearchSeekerInDB();
                             List<Job> listOfCompanyJobs = newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId);
-                            foreach (var job in seeker_job)
+                            foreach (var jobId in seeker_job)
                             {
                                 foreach (var seeker in listOfSeeker)
                                 {
-                                    foreach (var jobb in listOfCompanyJobs)
+                                    foreach (var job in listOfCompanyJobs)
                                     {
-                                        if (job.Seeker_id == seeker.Seeker_id && job.Job_id == jobb.Job_id)
+                                        if (jobId.Seeker_id == seeker.Seeker_id && jobId.Job_id == job.Job_id)
                                         {
-                                            Console.WriteLine($"{seeker.Seeker_name} have applied for {jobb.Job_title} job.");
+                                            Console.WriteLine($"{seeker.Seeker_name} have applied for {job.Job_title} job.");
                                         }
                                     }
                                 }
@@ -520,19 +520,19 @@ class UI
             }
         }
     }
-        public static int isNumbers(string input)
-    {   
+    public static int isNumbers(string input)
+    {
         int number;
         while (true)
         {
             bool success = int.TryParse(input, out number);
-            if(success)
+            if (success)
             {
                 break;
             }
             else
             {
-                
+
                 Console.WriteLine("Age must be a number. Try again: ");
                 input = Console.ReadLine();
             }
