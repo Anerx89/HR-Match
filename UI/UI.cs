@@ -330,9 +330,9 @@ class UI
                         if (seekerMenuKey == ConsoleKey.D1) // ADD A SEEKER TO A JOB
                         {
                             Console.Clear();
+
                             SeekerDB seeker_job = new();
                             JobDB job_seeker = new();
-
                             List<int> jobIDs = new();
 
                             Console.Write("Available jobs:\n");
@@ -340,10 +340,9 @@ class UI
                             {
                                 jobIDs.Add(job);
                             }
-
-                            foreach (var job in seeker_job.ShowJobName(jobIDs))
+                            foreach (var job in seeker_job.GetJobNameAndID(jobIDs))
                             {
-                                Console.WriteLine($"{job}");
+                                Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title}");
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
