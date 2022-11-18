@@ -15,7 +15,7 @@ public class CompanyDB
     public void DeleteJobDB(int companyID, int jobID)
     {
         var connection = new MySqlConnection(SeekerDB.sqlString);
-        connection.QueryMultiple($"DELETE FROM `seeker_job` WHERE {jobID};DELETE FROM `job_education` WHERE {jobID};DELETE FROM `job_license` WHERE {jobID};DELETE FROM `job` WHERE job.job_id={jobID};");
+        connection.QueryMultiple($"DELETE FROM `seeker_job` WHERE job_id={jobID};DELETE FROM `job_education` WHERE job_id={jobID};DELETE FROM `job_license` WHERE job_id={jobID};DELETE FROM `job` WHERE job.job_id={jobID};");
     }
 
     public void DeleteCompany(int companyID)

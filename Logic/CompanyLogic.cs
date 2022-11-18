@@ -9,9 +9,9 @@ public class CompanyLogic
     CompanyDB newCompanyDB = new();
     public static int loggedInCompanyId = 0;
 
-    public bool CreateNewCompany(string name, string location, string workArea, string email, string password)
+    public bool CreateNewCompany(string name, string location, string workArea, string email, string password) // Creates a new company.
     {
-        if (password.Length >= 2 && !password.Contains(" "))
+        if (password.Length >= 6 && !password.Contains(" "))
         {
             Company newComp = new(name, location, workArea, email, password);
             newCompanyDB.AddCompanyToDB(newComp);
@@ -20,7 +20,7 @@ public class CompanyLogic
         return false;
     }
 
-    public bool LoginCompany(string email, string password)
+    public bool LoginCompany(string email, string password) //Checks if company with entered email and password exists in db and if yes returns true.
     {
         foreach (var item in SearchCompanyInDB())
         {
@@ -33,37 +33,14 @@ public class CompanyLogic
         return false;
     }
 
-    public List<Company> SearchCompanyInDB()
+    public List<Company> SearchCompanyInDB() //Searches trough db for all companies.
     {
-        List<Company> loggedInCompany = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
         var data = connection.Query<Company>("SELECT c_id AS C_id, c_email AS C_email, password AS Password FROM company;").ToList();
-        foreach (Company c in data)
-        {
-            loggedInCompany.Add(c);
-        }
-        return loggedInCompany;
+        return data;
     }
 
-    // public List<Seeker> GetSeekersThatApplyToCompany(int companyID)
-    // {
-    //     List<Seeker> seekerApply = new();
-    //     var connection = new MySqlConnection(SeekerDB.sqlString);
-    //     var seekers_job = connection.Query<Seeker>($"SELECT * FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
-    //     var seekers = connection.Query<Seeker>($"SELECT * FROM seeker");
-    //     foreach (var seekerId in seekers_job)
-    //     {
-    //         foreach (var seeker in seekers)
-    //         {
-    //             if (seekerId.Seeker_id == seeker.Seeker_id)
-    //             {
-    //                 seekerApply.Add(seekerId);
-    //             }
-    //         }
-    //     }
-    //     return seekerApply;
-    // }
-    public List<Seeker_job> GetSeekersThatApplyToCompany(int companyID)
+    public List<Seeker_job> GetSeekersThatApplyToCompany(int companyID) //Searches after appliances that have applied to logged in company jobs.
     {
         List<Seeker> seekerApply = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
@@ -71,7 +48,7 @@ public class CompanyLogic
         return seeker;
     }
 
-    public List<Job> ListCompanyJobs(int companyID)
+    public List<Job> ListCompanyJobs(int companyID) // Searches for logged in company jobs and returns a list.
     {
         var connection = new MySqlConnection(SeekerDB.sqlString);
         var jobs = connection.Query<Job>($"SELECT * FROM `job` WHERE job.company_id={companyID}").ToList();

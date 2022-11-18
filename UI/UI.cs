@@ -15,7 +15,8 @@ class UI
         while (isRunning == true)
         {
             Console.Clear();
-            Console.WriteLine("|1| - Log in\n|2| - Register account\n|3| - Register company\n|Q| - To exit any time");
+            Console.WriteLine("Welcome to A tier HR Match making!\n");
+            Console.WriteLine("|1| - Log in\n|2| - Register account\n|3| - Register company\n|Q| - Exit");
             ConsoleKey inputKey = Console.ReadKey().Key;
 
 
@@ -96,8 +97,9 @@ class UI
         newSeeker.CreateNewJobSeeker(name, age, email, password, exp, license, education);
     }
 
-    public void RegisterNewCompany()
+    public void RegisterNewCompany() //Takes in all information needed from user and sends it to companyLogic.
     {
+        Console.Clear();
         Console.Write("Please enter your company name:");
         string name = Console.ReadLine();
         Console.Write("Please enter your location:");
@@ -110,17 +112,18 @@ class UI
         string password = "";
         while (!passwordSuccess)
         {
-            Console.Write("Please enter your password:");
+            Console.Write("Please enter your password,\nPassword needs to be minimum 6 characters:");
             string p = Console.ReadLine();
+            int passwordLength = p.Length;
             bool isAlpha = p.Contains(" ");
-            if (!isAlpha)
+            if (!isAlpha && passwordLength >= 6)
             {
                 password = p;
                 passwordSuccess = true;
             }
             else
             {
-                Console.WriteLine("You cant have spaces in your password.\nTry again.");
+                Console.WriteLine("Password was to short or contained a space.\nTry again.");
                 Console.ReadLine();
             }
         }
@@ -131,6 +134,7 @@ class UI
 
     public void RegisterNewJob()
     {
+        Console.Clear();
         Console.Write("Please enter job title:");
         string title = Console.ReadLine();
         Console.Write("Please enter job location:");
@@ -307,7 +311,7 @@ class UI
         while (isRunning == true)
         {
             Console.Clear();
-            Console.WriteLine("|1| - Log in User\n|2| - Login Company");
+            Console.WriteLine("|1| - Login User\n|2| - Login Company");
             ConsoleKey inputKey = Console.ReadKey().Key;
 
             if (inputKey == ConsoleKey.D1)
@@ -421,13 +425,13 @@ class UI
                     {
                         CompanyDB newCompanyDB = new();
                         Console.Clear();
-                        Console.WriteLine("|1| - Register new job\n|2| - See applications\n|3| - Delete job\n|4| - Delete account\n|Q| - To log off");
+                        Console.WriteLine("|1| - Register new job\n|2| - See all applicants\n|3| - See all your job ads\n|4| - Delete account\n|Q| - Logout");
                         ConsoleKey input = Console.ReadKey().Key;
 
                         if (input == ConsoleKey.D1)
                         {
                             Console.Clear();
-                            Console.WriteLine("Register new job.");
+                            Console.WriteLine("Register new job ad.");
                             RegisterNewJob();
                         }
                         else if (input == ConsoleKey.D2)
@@ -446,7 +450,7 @@ class UI
                                     {
                                         if (jobId.Seeker_id == seeker.Seeker_id && jobId.Job_id == job.Job_id)
                                         {
-                                            Console.WriteLine($"{seeker.Seeker_name} have applied for {job.Job_title} job.");
+                                            Console.WriteLine($"{seeker.Seeker_name} have applied for {job.Job_title} job ad.");
                                         }
                                     }
                                 }
@@ -456,7 +460,7 @@ class UI
                         else if (input == ConsoleKey.D3)
                         {
                             Console.Clear();
-                            Console.WriteLine("Jobs to delete:");
+                            Console.WriteLine("List of all job ads:");
                             List<int> tempList = new();
                             foreach (var job in newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
                             {
@@ -464,13 +468,17 @@ class UI
                                 tempList.Add(job.Job_id);
                             }
                             int jobId;
-                            Console.Write("Please enter id to delete: ");
+                            Console.Write("Press enter to continue or enter job ad id to delete: ");
                             bool success = int.TryParse(Console.ReadLine(), out jobId);
                             if (tempList.Contains(jobId) && success)
                             {
                                 newCompanyDB.DeleteJobDB(CompanyLogic.loggedInCompanyId, jobId);
                                 Console.Write("Delete successful.");
                                 Console.ReadLine();
+                            }
+                            else if (!success)
+                            {
+                                //Go back to menu.
                             }
                             else
                             {
@@ -495,7 +503,7 @@ class UI
                         }
                         else if (input == ConsoleKey.Q)
                         {
-                            Environment.Exit(0);
+                            Menu();
                         }
                         else
                         {
