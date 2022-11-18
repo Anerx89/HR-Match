@@ -350,7 +350,7 @@ class UI
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
-                            int SeekerApply = Convert.ToInt32(Console.ReadLine());
+                            int SeekerApply = isNumbers(Console.ReadLine());
 
 
                             if (jobIDs.Contains(SeekerApply))
@@ -390,7 +390,7 @@ class UI
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want stop applying for: ");
-                            int SeekerRemove = Convert.ToInt32(Console.ReadLine());
+                            int SeekerRemove = isNumbers(Console.ReadLine());
 
                             if (IdList.Contains(SeekerRemove))
                             {
@@ -577,7 +577,7 @@ class UI
             else
             {
 
-                Console.WriteLine("Age must be a number. Try again: ");
+                Console.WriteLine("Must be a number. Try again: ");
                 input = Console.ReadLine();
             }
         }
