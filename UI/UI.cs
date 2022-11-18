@@ -328,7 +328,7 @@ class UI
                     while (SeekerMenu == true)
                     {
                         Console.Clear();
-                        Console.WriteLine("|1| - Apply for job\n|2| - Delete job application\n|3| - Delete Account ");
+                        Console.WriteLine("|1| - Apply for job\n|2| - Delete job application\n|3| - Delete Account\n|Q| - Logout");
                         ConsoleKey seekerMenuKey = Console.ReadKey().Key;
 
                         if (seekerMenuKey == ConsoleKey.D1) // ADD A SEEKER TO A JOB
@@ -351,11 +351,21 @@ class UI
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
                             int SeekerApply = Convert.ToInt32(Console.ReadLine());
-                            seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
 
-                            Console.Clear();
-                            Console.Write($"\nYou have applied for {SeekerApply}!\nPress any key to continue");
-                            Console.ReadKey();
+
+                            if (jobIDs.Contains(SeekerApply))
+                            {
+                                seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
+                                Console.Clear();
+                                Console.Write($"\nYou have applied for {SeekerApply}!\nPress any key to continue");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.Write("Specified ID does not exist.\nPress any key to return");
+                                Console.ReadLine();
+                            }
                         }
 
                         else if (seekerMenuKey == ConsoleKey.D2) // DELETE A SEEKER FROM A JOB
@@ -400,6 +410,14 @@ class UI
                                 Console.ReadLine();
                                 Menu();
                             }
+                        }
+                        else if (seekerMenuKey == ConsoleKey.Q)
+                        {
+                            Menu();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please try again");
                         }
                     }
 

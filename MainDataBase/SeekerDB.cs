@@ -108,4 +108,18 @@ public class SeekerDB
         }
         return jobNames;
     }
+
+    public List<int> GetSeekerApplyHistoryTEST(int seekerID)
+    {
+        List<int> seekerApply = new();
+        var connection = new MySqlConnection(SeekerDB.sqlString);
+        var jobs = connection.Query<Job>($"SELECT * FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
+
+        foreach (var job in jobs)
+        {
+            seekerApply.Add(job.Job_id);
+        }
+        List<int> cleanedIdList = seekerApply.Distinct().ToList();
+        return cleanedIdList;
+    }
 }
