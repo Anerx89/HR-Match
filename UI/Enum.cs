@@ -4,7 +4,7 @@ public enum License
     A,
     B,
     C,
-    None
+    NoLicense
 }
 
 public enum Education
@@ -14,5 +14,5 @@ public enum Education
     Universitet,
     Yrkeshögskola,
     Folkhögskola,
-    None
+    NoEducation
 }

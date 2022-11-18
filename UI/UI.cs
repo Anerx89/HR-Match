@@ -174,7 +174,7 @@ class UI
             }
             else if (licenseChoice == ConsoleKey.D4)
             {
-                licenseType = (int)License.None;
+                licenseType = (int)License.NoLicense;
                 break;
             }
             else
@@ -216,7 +216,7 @@ class UI
             }
             else if (educationChoice == ConsoleKey.D5)
             {
-                educationType = (int)Education.None;
+                educationType = (int)Education.NoEducation;
                 break;
             }
             else
@@ -234,7 +234,7 @@ class UI
         {
             Console.Clear();
             Console.WriteLine("Choose a  driver license requirement for the job: ");
-            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|3| - No Requirements");
+            Console.WriteLine("|1| - A\n|2| - B\n|3| - C\n|4| - No Requirements");
             ConsoleKey licenseChoice = Console.ReadKey().Key;
             if (licenseChoice == ConsoleKey.D1)
             {
@@ -253,7 +253,7 @@ class UI
             }
             else if (licenseChoice == ConsoleKey.D4)
             {
-                licenseType = (int)License.None;
+                licenseType = (int)License.NoLicense;
                 break;
             }
             else
@@ -295,7 +295,7 @@ class UI
             }
             else if (educationChoice == ConsoleKey.D5)
             {
-                educationType = (int)Education.None;
+                educationType = (int)Education.NoEducation;
                 break;
             }
             else
