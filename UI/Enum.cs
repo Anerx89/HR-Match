@@ -1,16 +1,18 @@
 public enum License
 {
-    none,
+    empty,
     A,
     B,
     C,
+    None
 }
 
 public enum Education
 {
-    none,
+    empty,
     Gymnasium,
     Universitet,
     Yrkeshögskola,
     Folkhögskola,
+    None
 }

@@ -174,7 +174,7 @@ class UI
             }
             else if (licenseChoice == ConsoleKey.D4)
             {
-                licenseType = (int)License.none;
+                licenseType = (int)License.None;
                 break;
             }
             else
@@ -216,7 +216,7 @@ class UI
             }
             else if (educationChoice == ConsoleKey.D5)
             {
-                educationType = (int)Education.none;
+                educationType = (int)Education.None;
                 break;
             }
             else
@@ -253,7 +253,7 @@ class UI
             }
             else if (licenseChoice == ConsoleKey.D4)
             {
-                licenseType = (int)License.none;
+                licenseType = (int)License.None;
                 break;
             }
             else
@@ -295,7 +295,8 @@ class UI
             }
             else if (educationChoice == ConsoleKey.D5)
             {
-                educationType = (int)Education.none;
+                educationType = (int)Education.None;
+                break;
             }
             else
             {
