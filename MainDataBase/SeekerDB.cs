@@ -84,20 +84,6 @@ public class SeekerDB
         connection.QueryMultiple($"DELETE FROM `seeker_job` WHERE {seekerID};DELETE FROM `seeker_education` WHERE {seekerID};DELETE FROM `seeker_license` WHERE {seekerID};DELETE FROM `seeker` WHERE seeker_id={seekerID}");
     }
 
-    public List<int> GetSeekerApplyHistory(int seekerID)
-    {
-        List<int> seekerApply = new();
-        var connection = new MySqlConnection(SeekerDB.sqlString);
-        var jobs = connection.Query<Job>($"SELECT * FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
-
-        foreach (var job in jobs)
-        {
-            seekerApply.Add(job.Job_id);
-        }
-        List<int> cleanedIdList = seekerApply.Distinct().ToList();
-        return cleanedIdList;
-    }
-
     public List<Job> GetJobNameAndID(List<int> jobID)
     {
         List<Job> jobNames = new();
@@ -109,17 +95,22 @@ public class SeekerDB
         return jobNames;
     }
 
-    public List<int> GetSeekerApplyHistoryTEST(int seekerID)
+    public List<Job> GetSeekerApplyHistory(int seekerID)
     {
         List<int> seekerApply = new();
+        List<Job> seekerJobList = new();
         var connection = new MySqlConnection(SeekerDB.sqlString);
-        var jobs = connection.Query<Job>($"SELECT * FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
-
-        foreach (var job in jobs)
+        var jobs = connection.Query<int>($"SELECT job_id FROM seeker_job WHERE seeker_id ={seekerID};").ToList();
+        foreach (var id in jobs)
         {
-            seekerApply.Add(job.Job_id);
+            seekerApply.Add(id);
         }
-        List<int> cleanedIdList = seekerApply.Distinct().ToList();
-        return cleanedIdList;
+
+        foreach (var id in seekerApply)
+        {
+            var connection2 = new MySqlConnection(SeekerDB.sqlString);
+            seekerJobList.Add(connection.QuerySingle<Job>($"SELECT job_title AS Job_title, job_id AS Job_id FROM job WHERE job_id={id};"));
+        }
+        return seekerJobList;
     }
 }
