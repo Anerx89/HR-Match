@@ -372,26 +372,45 @@ class UI
                         {
                             Console.Clear();
                             SeekerDB seeker_job = new();
+                            List<Job> JobList = new();
+                            List<int> IdList = new();
 
                             Console.Write("Your current applications :\n");
                             foreach (var job in seeker_job.GetSeekerApplyHistory(SeekerLogic.loggedInSeekerId))
                             {
+                                JobList.Add(job);
+                            }
+                            foreach (var job in JobList)
+                            {
                                 Console.WriteLine(job);
+                            }
+                            foreach (var job in JobList)
+                            {
+                                IdList.Add(job.Job_id);
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want stop applying for: ");
                             int SeekerRemove = Convert.ToInt32(Console.ReadLine());
 
-                            Console.Clear();
-                            Console.Write($"Are you sure you want to stop applying for {SeekerRemove}?\n|1| - Delete\n|2| - Go Back");
-                            ConsoleKey confirmKey = Console.ReadKey().Key;
-
-                            if (confirmKey == ConsoleKey.D1)
+                            if (IdList.Contains(SeekerRemove))
                             {
                                 Console.Clear();
-                                seeker_job.RemoveFromSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerRemove);
-                                Console.Write($"You are no longer applying for {SeekerRemove}.\nPress any key to return");
-                                Console.ReadKey();
+                                Console.Write($"Are you sure you want to stop applying for {SeekerRemove}?\n|1| - Delete\n|2| - Go Back");
+                                ConsoleKey confirmKey = Console.ReadKey().Key;
+
+                                if (confirmKey == ConsoleKey.D1)
+                                {
+                                    Console.Clear();
+                                    seeker_job.RemoveFromSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerRemove);
+                                    Console.Write($"You are no longer applying for {SeekerRemove}.\nPress any key to return");
+                                    Console.ReadKey();
+                                }
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.Write("Specified ID does not exist.\nPress any key to return");
+                                Console.ReadLine();
                             }
                         }
 
