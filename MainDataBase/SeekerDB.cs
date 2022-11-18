@@ -92,7 +92,7 @@ public class SeekerDB
         foreach (var jobid in jobID)
         {
             var connection = new MySqlConnection(SeekerDB.sqlString);
-            jobNames.Add(connection.QuerySingle<Job>($"SELECT job_title AS Job_title, job_id AS Job_id FROM job WHERE job_id={jobid};"));
+            jobNames.Add(connection.QuerySingle<Job>($"SELECT job_title AS Job_title, job_id AS Job_id, job_location AS Job_location FROM job WHERE job_id={jobid};"));
         }
         return jobNames;
     }
@@ -111,7 +111,7 @@ public class SeekerDB
         foreach (var id in seekerApply)
         {
             var connection2 = new MySqlConnection(SeekerDB.sqlString);
-            seekerJobList.Add(connection.QuerySingle<Job>($"SELECT job_title AS Job_title, job_id AS Job_id FROM job WHERE job_id={id};"));
+            seekerJobList.Add(connection.QuerySingle<Job>($"SELECT job_title AS Job_title, job_id AS Job_id, job_location AS Job_location FROM job WHERE job_id={id};"));
         }
         return seekerJobList;
     }
