@@ -336,15 +336,15 @@ class UI
                                 Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title} in {job.Job_location}\nJob description: {job.Job_description}\n");
                             }
 
-                            Console.WriteLine("\nEnter the ID of the job you want to apply for");
+                            Console.WriteLine("\nEnter the ID of the job you want to apply for or press enter to return");
 
-                            int SeekerApply;
-                            bool success = int.TryParse(Console.ReadLine(), out SeekerApply);
-                            if (jobIDs.Contains(SeekerApply) && success)
+                            int apply;
+                            bool success = int.TryParse(Console.ReadLine(), out apply);
+                            if (jobIDs.Contains(apply) && success)
                             {
-                                seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
+                                seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, apply);
                                 Console.Clear();
-                                Console.Write($"\nYou have applied for {SeekerApply}!\nPress any key to continue");
+                                Console.Write($"\nYou have applied for {apply}!\nPress any key to continue");
                                 Console.ReadKey();
                             }
                             else if (!success)
@@ -357,7 +357,6 @@ class UI
                                 Console.Write("Specified ID does not exist.\nPress any key to return");
                                 Console.ReadLine();
                             }
-
                         }
 
                         else if (seekerMenuKey == ConsoleKey.D2) // DELETE A SEEKER FROM A JOB
@@ -381,22 +380,27 @@ class UI
                                 IdList.Add(job.Job_id);
                             }
 
-                            Console.WriteLine("\nEnter the ID of the job you want stop applying for: ");
-                            int SeekerRemove = isNumbers(Console.ReadLine());
+                            Console.WriteLine("\nEnter the ID of the job you want stop applying for or press Enter to return: ");
+                            int remove;
+                            bool success = int.TryParse(Console.ReadLine(), out remove);
 
-                            if (IdList.Contains(SeekerRemove))
+                            if (IdList.Contains(remove) && success)
                             {
                                 Console.Clear();
-                                Console.Write($"Are you sure you want to stop applying for {SeekerRemove}?\n|1| - Delete\n|2| - Go Back");
+                                Console.Write($"Are you sure you want to stop applying for {remove}?\n|1| - Delete\n|2| - Go Back");
                                 ConsoleKey confirmKey = Console.ReadKey().Key;
 
                                 if (confirmKey == ConsoleKey.D1)
                                 {
                                     Console.Clear();
-                                    seeker_job.RemoveFromSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerRemove);
-                                    Console.Write($"You are no longer applying for {SeekerRemove}.\nPress any key to return");
+                                    seeker_job.RemoveFromSeeker_Job(SeekerLogic.loggedInSeekerId, remove);
+                                    Console.Write($"You are no longer applying for {remove}.\nPress any key to return");
                                     Console.ReadKey();
                                 }
+                            }
+                            else if (!success)
+                            {
+                                //Go back to menu.
                             }
                             else
                             {
@@ -431,7 +435,6 @@ class UI
                             Console.WriteLine("Invalid input. Please try again");
                         }
                     }
-
                 }
                 else
                 {

@@ -5,8 +5,8 @@ namespace MainDataBase;
 
 public class SeekerDB
 {
-    // public static string sqlString = "Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;";
-    public static string sqlString = "Server=13.51.172.117;Database=hr_match;Uid=root;Pwd=i-0eb406fb274d87d14;";
+    public static string sqlString = "Server=localhost;Database=hr_match;Uid=Alexander;Pwd=;";
+    // public static string sqlString = "Server=13.51.172.117;Database=hr_match;Uid=root;Pwd=i-0eb406fb274d87d14;";
 
     public void AddJobSeekerToDB(IsData newJobSeeker)
     {
