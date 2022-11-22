@@ -49,45 +49,33 @@ class UI
         Console.Clear();
         Console.Write("Please enter your name:");
         string name = CheckIfNullOrWhiteSpace(Console.ReadLine());
-        bool isAlpha = name.All(Char.IsLetter);
-        if (isAlpha)
-        {
-            Console.WriteLine($"Welcome, {name}!\n");
-            Console.ReadLine();
-        }
-        else
-        {
-            Console.Clear();
-            Console.WriteLine("Only letters are allowed!\nPress any key to return");
-            Console.ReadLine();
-        }
         Console.Write("Please enter your age:");
         int age = isNumbers(Console.ReadLine());
         Console.Write("Please enter your email:");
-        string email = Console.ReadLine();
+        string email = CheckIfNullOrWhiteSpace(Console.ReadLine());
 
         bool passwordSuccess = false;
         string password = "";
         while (!passwordSuccess)
         {
-            Console.Write("Please enter your password:");
+            Console.Write("Please enter your password,\nPassword needs to be minimum 6 characters:");
             string p = Console.ReadLine();
-            bool pwIsAlpha = p.Contains(" ");
-            if (!pwIsAlpha)
+            int passwordLength = p.Length;
+            bool isAlpha = p.Contains(" ");
+            if (!isAlpha && passwordLength >= 6)
             {
                 password = p;
                 passwordSuccess = true;
             }
             else
             {
-                Console.WriteLine("You cant have spaces in your password.\nTry again.");
+                Console.WriteLine("Password was to short or contained a space.\nTry again.");
                 Console.ReadLine();
             }
-
         }
 
         Console.Write("Write a short summary of your job experience:");
-        string exp = Console.ReadLine();
+        string exp = CheckIfNullOrWhiteSpace(Console.ReadLine());
         int license = ChooseLicenseToSeeker();
         int education = ChooseEducationToSeeker();
 
