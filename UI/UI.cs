@@ -438,7 +438,7 @@ class UI
                 }
                 else
                 {
-                    Console.Write("You are not in");
+                    Console.Write("Wrong email or password!\nPlease try again.");
                     Console.ReadLine();
                 }
 
