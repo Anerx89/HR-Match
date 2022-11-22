@@ -6,7 +6,6 @@ class UI
 {
     SeekerLogic newSeeker = new();
     CompanyLogic newCompany = new();
-
     JobLogic newJob = new();
 
     public void Menu()
@@ -49,12 +48,10 @@ class UI
     {
         Console.Clear();
         Console.Write("Please enter your name:");
-        string n = Console.ReadLine();
-        string name = "";
-        bool isAlpha = n.All(Char.IsLetter);
+        string name = CheckIfNullOrWhiteSpace(Console.ReadLine());
+        bool isAlpha = name.All(Char.IsLetter);
         if (isAlpha)
         {
-            name = n;
             Console.WriteLine($"Welcome, {name}!\n");
             Console.ReadLine();
         }
@@ -63,7 +60,6 @@ class UI
             Console.Clear();
             Console.WriteLine("Only letters are allowed!\nPress any key to return");
             Console.ReadLine();
-            RegisterNewJobSeeker();
         }
         Console.Write("Please enter your age:");
         int age = isNumbers(Console.ReadLine());
@@ -87,6 +83,7 @@ class UI
                 Console.WriteLine("You cant have spaces in your password.\nTry again.");
                 Console.ReadLine();
             }
+
         }
 
         Console.Write("Write a short summary of your job experience:");
@@ -352,15 +349,19 @@ class UI
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
-                            int SeekerApply = isNumbers(Console.ReadLine());
 
-
-                            if (jobIDs.Contains(SeekerApply))
+                            int SeekerApply;
+                            bool success = int.TryParse(Console.ReadLine(), out SeekerApply);
+                            if (jobIDs.Contains(SeekerApply) && success)
                             {
                                 seeker_job.AddToSeeker_Job(SeekerLogic.loggedInSeekerId, SeekerApply);
                                 Console.Clear();
                                 Console.Write($"\nYou have applied for {SeekerApply}!\nPress any key to continue");
                                 Console.ReadKey();
+                            }
+                            else if (!success)
+                            {
+                                //Go back to menu.
                             }
                             else
                             {
@@ -368,6 +369,7 @@ class UI
                                 Console.Write("Specified ID does not exist.\nPress any key to return");
                                 Console.ReadLine();
                             }
+
                         }
 
                         else if (seekerMenuKey == ConsoleKey.D2) // DELETE A SEEKER FROM A JOB
@@ -582,7 +584,6 @@ class UI
             }
             else
             {
-
                 Console.WriteLine("Must be a number. Try again: ");
                 input = Console.ReadLine();
             }
