@@ -341,14 +341,14 @@ class UI
                             JobDB job_seeker = new();
                             List<int> jobIDs = new();
 
-                            Console.Write("Available jobs:\n");
+                            Console.WriteLine("Available jobs:\n");
                             foreach (var job in job_seeker.GetJobRequirements(SeekerLogic.loggedInSeekerId))
                             {
                                 jobIDs.Add(job);
                             }
                             foreach (var job in seeker_job.GetJobNameAndID(jobIDs))
                             {
-                                Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title} in {job.Job_location}");
+                                Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title} in {job.Job_location}\nJob description: {job.Job_description}\n");
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for");
