@@ -463,7 +463,7 @@ class UI
                     {
                         CompanyDB newCompanyDB = new();
                         Console.Clear();
-                        Console.WriteLine("|1| - Register new job\n|2| - See all applicants\n|3| - See all your job ads\n|4| - Delete account\n|Q| - Logout");
+                        Console.WriteLine("|1| - Register new job\n|2| - See all applicants\n|3| - See all your job ads\n|Q| - Logout");
                         ConsoleKey input = Console.ReadKey().Key;
 
                         if (input == ConsoleKey.D1)
@@ -477,9 +477,9 @@ class UI
                             SeekerDB sDB = new();
                             Console.Clear();
                             Console.WriteLine("List of Applicants");
-                            List<Seeker_job> seeker_job = newCompany.GetSeekersThatApplyToCompany(CompanyLogic.loggedInCompanyId);
+                            List<Seeker_job> seeker_job = newCompanyDB.GetSeekersThatApplyToCompany(CompanyLogic.loggedInCompanyId);
                             List<Seeker> listOfSeeker = sDB.SearchSeekerInDB();
-                            List<Job> listOfCompanyJobs = newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId);
+                            List<Job> listOfCompanyJobs = newCompanyDB.ListCompanyJobs(CompanyLogic.loggedInCompanyId);
                             foreach (var jobId in seeker_job)
                             {
                                 foreach (var seeker in listOfSeeker)
@@ -500,7 +500,7 @@ class UI
                             Console.Clear();
                             Console.WriteLine("List of all job ads:");
                             List<int> tempList = new();
-                            foreach (var job in newCompany.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
+                            foreach (var job in newCompanyDB.ListCompanyJobs(CompanyLogic.loggedInCompanyId))
                             {
                                 Console.WriteLine(job.ToString());
                                 tempList.Add(job.Job_id);
@@ -522,21 +522,6 @@ class UI
                             {
                                 Console.Write("Delete was unsuccessful.\nPlease try again.");
                                 Console.ReadLine();
-                            }
-                        }
-                        else if (input == ConsoleKey.D4)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Are you sure you want to delete your account?");
-                            Console.WriteLine("|1| - Delete\n|2| - Go Back\n");
-                            ConsoleKey choice = Console.ReadKey().Key;
-                            if (choice == ConsoleKey.D1)
-                            {
-                                Console.Clear();
-                                newCompanyDB.DeleteCompany(CompanyLogic.loggedInCompanyId);
-                                Console.WriteLine("Account is deleted.\nPress any key to go back to main menu");
-                                Console.ReadLine();
-                                Menu();
                             }
                         }
                         else if (input == ConsoleKey.Q)

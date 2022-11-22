@@ -22,7 +22,7 @@ public class CompanyLogic
 
     public bool LoginCompany(string email, string password) //Checks if company with entered email and password exists in db and if yes returns true.
     {
-        foreach (var item in SearchCompanyInDB())
+        foreach (var item in newCompanyDB.SearchCompanyInDB())
         {
             if (item.C_email.Contains(email) && item.Password.Contains(password))
             {
@@ -31,27 +31,5 @@ public class CompanyLogic
             }
         }
         return false;
-    }
-
-    public List<Company> SearchCompanyInDB() //Searches trough db for all companies.
-    {
-        var connection = new MySqlConnection(SeekerDB.sqlString);
-        var data = connection.Query<Company>("SELECT c_id AS C_id, c_email AS C_email, password AS Password FROM company;").ToList();
-        return data;
-    }
-
-    public List<Seeker_job> GetSeekersThatApplyToCompany(int companyID) //Searches after appliances that have applied to logged in company jobs.
-    {
-        List<Seeker> seekerApply = new();
-        var connection = new MySqlConnection(SeekerDB.sqlString);
-        var seeker = connection.Query<Seeker_job>($"SELECT * FROM seeker_job sj INNER JOIN job j ON sj.job_id = j.job_id WHERE j.company_id ={companyID};").ToList();
-        return seeker;
-    }
-
-    public List<Job> ListCompanyJobs(int companyID) // Searches for logged in company jobs and returns a list.
-    {
-        var connection = new MySqlConnection(SeekerDB.sqlString);
-        var jobs = connection.Query<Job>($"SELECT * FROM `job` WHERE job.company_id={companyID}").ToList();
-        return jobs;
     }
 }
