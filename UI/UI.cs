@@ -333,7 +333,7 @@ class UI
                             }
                             foreach (var job in seeker_job.GetJobNameAndID(jobIDs))
                             {
-                                Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title} in {job.Job_location}\nJob description: {job.Job_description}\n");
+                                Console.WriteLine(job.ToString());
                             }
 
                             Console.WriteLine("\nEnter the ID of the job you want to apply for or press enter to return");
@@ -373,7 +373,7 @@ class UI
                             }
                             foreach (var job in JobList)
                             {
-                                Console.WriteLine($"|ID|{job.Job_id} - {job.Job_title} in {job.Job_location}");
+                                Console.WriteLine(job.ToString());
                             }
                             foreach (var job in JobList)
                             {
