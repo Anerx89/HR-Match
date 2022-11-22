@@ -24,7 +24,7 @@ public class CompanyLogic
     {
         foreach (var item in newCompanyDB.SearchCompanyInDB())
         {
-            if (item.C_email.Contains(email) && item.Password.Contains(password))
+            if (item.C_email.Equals(email) && item.Password.Equals(password))
             {
                 loggedInCompanyId = item.C_id;
                 return true;

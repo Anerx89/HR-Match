@@ -25,7 +25,7 @@ public class SeekerLogic
     {
         foreach (var item in seekerDB.SearchSeekerInDB())
         {
-            if (item.Seeker_email.Contains(email) && item.Password.Contains(password))
+            if (item.Seeker_email.Equals(email) && item.Password.Equals(password))
             {
                 loggedInSeekerId = item.Seeker_id;
                 seekerDB.GetSeekerLicense(loggedInSeekerId);
